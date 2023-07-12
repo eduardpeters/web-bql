@@ -1,2 +1,71 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    let queryElements: string[] = [];
+
+    const handleDrag = (event: DragEvent) => {
+        if (!event || !event.dataTransfer) return;
+        const target = event.target as HTMLElement;
+        event.dataTransfer.setData("text/plain", target.innerText);
+        event.dataTransfer.dropEffect = "copy";
+    };
+
+    const handleDragOver = (event: DragEvent) => {
+        if (!event || !event.dataTransfer) return;
+        event.dataTransfer.dropEffect = "copy";
+    };
+
+    const handleDrop = (event: DragEvent) => {
+        if (!event || !event.dataTransfer) return;
+        const data = event.dataTransfer.getData("text/plain");
+        queryElements = [...queryElements, data];
+    };
+</script>
+
+<h1>Welcome to Block Query Language</h1>
+<main class="container">
+    <div class="keywords_holder">
+        {#each ["SELECT", "FROM", "WHERE"] as keyword}
+            <p draggable="true" on:dragstart={handleDrag}>{keyword}</p>
+        {/each}
+    </div>
+    <div
+        role="textbox"
+        class="queries_holder"
+        tabindex="-1"
+        on:dragover|preventDefault={handleDragOver}
+        on:drop|preventDefault={handleDrop}
+    >
+        {#if queryElements.length > 0}
+            <p>{queryElements.join(" ")}</p>
+        {:else}
+            <p>Drop some keywords here to begin</p>
+        {/if}
+    </div>
+    <button on:click={() => queryElements = []}>RESET</button>
+</main>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        min-height: 300px;
+    }
+
+    .keywords_holder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        min-width: 400px;
+    }
+
+    .queries_holder {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: flex-start;
+        border: 1px solid black;
+        min-width: 400px;
+    }
+</style>
