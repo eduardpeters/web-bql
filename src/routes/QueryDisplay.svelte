@@ -35,6 +35,6 @@
         align-items: baseline;
         justify-content: flex-start;
         border: 1px solid black;
-        min-width: 400px;
+        padding: 10px;
     }
 </style>
