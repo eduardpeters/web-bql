@@ -1,9 +1,28 @@
 <script lang="ts">
     import Block from "$lib/components/Block.svelte";
+
+    const keywords = [
+        {
+            name: "SELECT",
+            type: "keyword",
+        },
+        {
+            name: "FROM",
+            type: "keyword",
+        },
+        {
+            name: "WHERE",
+            type: "keyword",
+        },
+        {
+            name: "*",
+            type: "column",
+        },
+    ];
 </script>
 
 <div class="keywords_holder">
-    {#each ["SELECT", "FROM", "WHERE"] as keyword}
+    {#each keywords as keyword}
         <Block {keyword} />
     {/each}
 </div>
