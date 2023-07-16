@@ -1,5 +1,5 @@
 <script lang="ts">
-    let queryElements: string[] = [];
+    let queryElements: { name: string; type: string }[] = [];
 
     const handleDragOver = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
@@ -8,7 +8,7 @@
 
     const handleDrop = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
-        const data = event.dataTransfer.getData("text/plain");
+        const data = JSON.parse(event.dataTransfer.getData("text/plain"));
         queryElements = [...queryElements, data];
     };
 </script>
@@ -21,7 +21,7 @@
     on:drop|preventDefault={handleDrop}
 >
     {#if queryElements.length > 0}
-        <p>{queryElements.join(" ")}</p>
+        <p>{queryElements.map((e) => e.name).join(" ")}</p>
     {:else}
         <p>Drop some keywords here to begin</p>
     {/if}
