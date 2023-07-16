@@ -1,5 +1,7 @@
 <script lang="ts">
-    let queryElements: { name: string; type: string }[] = [];
+    import type { BlockContent } from "$lib/appTypes";
+
+    let queryElements: BlockContent[] = [];
 
     const handleDragOver = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;

@@ -1,8 +1,9 @@
 <script lang="ts">
-    export let keyword: { name: string; type: string };
+    import type { BlockContent, Dictionary } from "$lib/appTypes";
 
-    type ColorMap = { [key: string]: string};
-    const colors: ColorMap = {
+    export let keyword: BlockContent;
+
+    const colors: Dictionary<string> = {
         keyword: '#57cc99',
         column: '#80ED99',
     }
