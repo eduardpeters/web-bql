@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { BlockContent } from "$lib/appTypes";
+    import Block from "$lib/components/Block.svelte";
 
     let queryElements: BlockContent[] = [];
 
@@ -23,7 +24,9 @@
     on:drop|preventDefault={handleDrop}
 >
     {#if queryElements.length > 0}
-        <p>{queryElements.map((e) => e.name).join(" ")}</p>
+        {#each queryElements as element}
+            <Block keyword={element} />
+        {/each}
     {:else}
         <p>Drop some keywords here to begin</p>
     {/if}
