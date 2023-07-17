@@ -1,10 +1,22 @@
 <script lang="ts">
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
-    
+
     import initializeDB from "$lib/database/connection";
 
     let queryElements: BlockContent[] = [];
+    let input;
+
+    const handleUpload = () => {
+        const f = input.files[0];
+        if (!f) return;
+        const r = new FileReader();
+        r.addEventListener('load', function onLoad() {
+            initializeDB(r.result);
+            this.removeEventListener('load', onLoad);
+        });
+        r.readAsArrayBuffer(f);
+    };
 
     const handleDragOver = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
@@ -34,7 +46,8 @@
     {/if}
 </div>
 <button on:click={() => (queryElements = [])}>RESET</button>
-<button on:click={initializeDB}>TEST DB</button>
+<input type="file" bind:this={input} />
+<button on:click={handleUpload}>TEST DB</button>
 
 <style>
     .queries_holder {
