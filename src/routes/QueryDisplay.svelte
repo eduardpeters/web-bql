@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
+    
+    import initializeDB from "$lib/database/connection";
 
     let queryElements: BlockContent[] = [];
 
@@ -32,6 +34,7 @@
     {/if}
 </div>
 <button on:click={() => (queryElements = [])}>RESET</button>
+<button on:click={initializeDB}>TEST DB</button>
 
 <style>
     .queries_holder {
