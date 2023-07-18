@@ -3,7 +3,7 @@
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
-    import initializeDB from "$lib/database/connection";
+    import query from "$lib/database/connection";
 
     let queryElements: BlockContent[] = [];
     let input;
@@ -18,8 +18,10 @@
         //const f = input.files[0];
         const f  = file;
         if (!f) return;
-        console.log(f);
-        initializeDB(f);
+        let queryString = queryElements.map(e => e.name).join(' ');
+        queryString += ' homes';
+        console.log(queryString);
+        query(f, queryString);
         /* const r = new FileReader();
         r.addEventListener('load', function onLoad() {
             initializeDB(r.result);
