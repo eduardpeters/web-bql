@@ -1,33 +1,18 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
     import query from "$lib/database/connection";
 
     let queryElements: BlockContent[] = [];
-    let input;
-    let file;
+    export let dbFile;
 
-    onMount(async () => {
-        const res = await fetch('/simplefolks.sqlite');
-        file = await res.arrayBuffer();
-    });
-
-    const handleUpload = () => {
-        //const f = input.files[0];
-        const f  = file;
-        if (!f) return;
-        let queryString = queryElements.map(e => e.name).join(' ');
-        queryString += ' homes';
+    const runQuery = () => {
+        if (!dbFile || queryElements.length == 0) return;
+        let queryString = queryElements.map((e) => e.name).join(" ");
+        queryString += " pets";
         console.log(queryString);
-        query(f, queryString);
-        /* const r = new FileReader();
-        r.addEventListener('load', function onLoad() {
-            initializeDB(r.result);
-            this.removeEventListener('load', onLoad);
-        });
-        r.readAsArrayBuffer(f); */
+        query(dbFile, queryString);
     };
 
     const handleDragOver = (event: DragEvent) => {
@@ -58,8 +43,7 @@
     {/if}
 </div>
 <button on:click={() => (queryElements = [])}>RESET</button>
-<input type="file" bind:this={input} />
-<button on:click={handleUpload}>TEST DB</button>
+<button on:click={runQuery}>Run Query</button>
 
 <style>
     .queries_holder {
