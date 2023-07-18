@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
@@ -6,16 +7,25 @@
 
     let queryElements: BlockContent[] = [];
     let input;
+    let file;
+
+    onMount(async () => {
+        const res = await fetch('/simplefolks.sqlite');
+        file = await res.arrayBuffer();
+    });
 
     const handleUpload = () => {
-        const f = input.files[0];
+        //const f = input.files[0];
+        const f  = file;
         if (!f) return;
-        const r = new FileReader();
+        console.log(f);
+        initializeDB(f);
+        /* const r = new FileReader();
         r.addEventListener('load', function onLoad() {
             initializeDB(r.result);
             this.removeEventListener('load', onLoad);
         });
-        r.readAsArrayBuffer(f);
+        r.readAsArrayBuffer(f); */
     };
 
     const handleDragOver = (event: DragEvent) => {
