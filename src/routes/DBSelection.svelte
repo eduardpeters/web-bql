@@ -1,5 +1,6 @@
 <script lang="ts">
-    export let dbFile;
+    import { dbFile } from "$lib/stores/dbFile";
+
     let input: HTMLInputElement;
 
     const handleUpload = () => {
@@ -8,7 +9,7 @@
         if (!newFile) return;
         const r = new FileReader();
         r.addEventListener("load", function onLoad() {
-            dbFile = r.result;
+            $dbFile = r.result as ArrayBuffer;
             this.removeEventListener("load", onLoad);
         });
         r.readAsArrayBuffer(newFile);

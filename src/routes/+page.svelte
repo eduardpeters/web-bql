@@ -1,24 +1,23 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { dbFile } from "$lib/stores/dbFile";
 
     import DbSelection from "./DBSelection.svelte";
     import BlockDisplay from "./BlockDisplay.svelte";
     import QueryDisplay from "./QueryDisplay.svelte";
 
-    let dbFile: ArrayBuffer;
-
     onMount(async () => {
         const res = await fetch("/simplefolks.sqlite");
-        dbFile = await res.arrayBuffer();
+        $dbFile = await res.arrayBuffer();
     });
 </script>
 
 <h1>Welcome to Block Query Language</h1>
 <main class="container">
-    <DbSelection bind:dbFile />
+    <DbSelection />
     <div class="displays">
         <BlockDisplay />
-        <QueryDisplay bind:dbFile />
+        <QueryDisplay />
     </div>
 </main>
 

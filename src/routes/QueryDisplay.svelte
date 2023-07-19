@@ -1,18 +1,19 @@
 <script lang="ts">
+    import { dbFile } from "$lib/stores/dbFile";
+
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
     import query from "$lib/database/connection";
 
     let queryElements: BlockContent[] = [];
-    export let dbFile: ArrayBuffer;
 
     const runQuery = () => {
-        if (!dbFile || queryElements.length == 0) return;
+        if (!$dbFile || queryElements.length == 0) return;
         let queryString = queryElements.map((e) => e.name).join(" ");
         queryString += " pets";
         console.log(queryString);
-        query(dbFile, queryString);
+        query($dbFile, queryString);
     };
 
     const handleDragOver = (event: DragEvent) => {
