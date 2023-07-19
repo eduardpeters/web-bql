@@ -5,7 +5,7 @@
     import BlockDisplay from "./BlockDisplay.svelte";
     import QueryDisplay from "./QueryDisplay.svelte";
 
-    let dbFile;
+    let dbFile: ArrayBuffer;
 
     onMount(async () => {
         const res = await fetch('/simplefolks.sqlite');

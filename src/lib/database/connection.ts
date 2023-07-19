@@ -1,9 +1,9 @@
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 
-const query = async (dbFile, queryString) => {
+const query = async (dbFile: ArrayBuffer, queryString: string) => {
     const db = await initializeDB(dbFile);
-    const columns = [];
-    const results = [];
+    const columns: string[] = [];
+    const results: string[] = [];
     try {
         console.log('Query data with exec()...');
         db.exec({
@@ -18,18 +18,24 @@ const query = async (dbFile, queryString) => {
             sql: queryString,
             columnNames: columns,
             resultRows: results,
-            callback: (row) => {
+            callback: (row: string[]) => {
                 console.log(row);
             },
         });
         console.log(columns);
         console.log(results);
-    } finally {
+    } catch (e: unknown) {
+        if (e instanceof Error)
+            console.error(e.message);
+        else
+            console.error(String(e));
+    }
+    finally {
         db.close();
     }
 };
 
-const initializeDB = async (dbFile) => {
+const initializeDB = async (dbFile: ArrayBuffer) => {
     const sqlite3 = await sqlite3InitModule()
     try {
         console.log('Initialized, run demo');
@@ -41,8 +47,11 @@ const initializeDB = async (dbFile) => {
             sqlite3.capi.SQLITE_DESERIALIZE_FREEONCLOSE);
         db.checkRc(rc);
         return db;
-    } catch (e) {
-        console.error(e.message);
+    } catch (e: unknown) {
+        if (e instanceof Error)
+            console.error(e.message);
+        else
+            console.error(String(e));
     }
 }
 

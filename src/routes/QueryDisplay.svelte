@@ -5,7 +5,7 @@
     import query from "$lib/database/connection";
 
     let queryElements: BlockContent[] = [];
-    export let dbFile;
+    export let dbFile: ArrayBuffer;
 
     const runQuery = () => {
         if (!dbFile || queryElements.length == 0) return;
