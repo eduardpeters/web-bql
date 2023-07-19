@@ -7,7 +7,7 @@ const query = async (dbFile: ArrayBuffer, queryString: string) => {
     try {
         console.log('Query data with exec()...');
         db.exec({
-            sql: 'SELECT name FROM sqlite_master',
+            sql: 'SELECT name FROM sqlite_master WHERE type = \'table\'',
             columnNames: columns,
             resultRows: results,
         });
