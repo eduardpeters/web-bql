@@ -21,8 +21,12 @@
 {:else}
     <p>Using default DB</p>
 {/if}
-<input type="file" bind:this={input} />
-<button on:click={handleUpload}>Upload DB</button>
+<input
+    type="file"
+    accept=".sqlite"
+    bind:this={input}
+    on:change={handleUpload}
+/>
 
 <style>
 </style>
