@@ -8,17 +8,17 @@
     let dbFile: ArrayBuffer;
 
     onMount(async () => {
-        const res = await fetch('/simplefolks.sqlite');
+        const res = await fetch("/simplefolks.sqlite");
         dbFile = await res.arrayBuffer();
     });
 </script>
 
 <h1>Welcome to Block Query Language</h1>
 <main class="container">
-    <DbSelection {dbFile} />
+    <DbSelection bind:dbFile />
     <div class="displays">
         <BlockDisplay />
-        <QueryDisplay {dbFile} />
+        <QueryDisplay bind:dbFile />
     </div>
 </main>
 
