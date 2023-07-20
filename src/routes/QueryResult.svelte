@@ -16,8 +16,10 @@
 </script>
 
 <div>
+    <button on:click={runQuery}>Run Query</button>
+    <button on:click={() => queryResult = undefined}>Reset Result</button>
     {#if !queryResult}
-        <p>results table goes here</p>
+        <p>Run a query to display results</p>
     {:else}
         <table>
             <thead>
@@ -36,5 +38,4 @@
             </tbody>
         </table>
     {/if}
-    <button on:click={runQuery}>Run Query</button>
 </div>
