@@ -3,27 +3,31 @@ import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 const query = async (dbFile: ArrayBuffer, queryString: string) => {
     const db = await initializeDB(dbFile);
     const columns: string[] = [];
-    const results: string[] = [];
+    const rows: string[] = [];
     try {
         console.log('Query data with exec()...');
         db.exec({
             sql: 'SELECT name FROM sqlite_master WHERE type = \'table\'',
             columnNames: columns,
-            resultRows: results,
+            resultRows: rows,
         });
         console.log(columns);
-        console.log(results);
+        console.log(rows);
         console.log(queryString);
         db.exec({
             sql: queryString,
             columnNames: columns,
-            resultRows: results,
+            resultRows: rows,
             callback: (row: string[]) => {
                 console.log(row);
             },
         });
         console.log(columns);
-        console.log(results);
+        console.log(rows);
+        return ({
+            columns,
+            rows,
+        })
     } catch (e: unknown) {
         if (e instanceof Error)
             console.error(e.message);

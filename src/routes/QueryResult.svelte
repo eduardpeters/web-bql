@@ -1,20 +1,25 @@
 <script lang="ts">
     import { dbFile } from "$lib/stores/dbFile";
-    import type { BlockContent } from "$lib/appTypes";
+    import type { BlockContent, QueryResult } from "$lib/appTypes";
     import query from "$lib/database/connection";
 
     export let queryElements: BlockContent[];
+    let queryResult: QueryResult | undefined;
 
-    const runQuery = () => {
+    const runQuery = async () => {
         if (!$dbFile || queryElements.length == 0) return;
         let queryString = queryElements.map((e) => e.name).join(" ");
         queryString += " pets";
         console.log(queryString);
-        query($dbFile, queryString);
+        queryResult = await query($dbFile, queryString);
     };
 </script>
 
 <div>
-    <p>results table goes here</p>
+    {#if !queryResult}
+        <p>results table goes here</p>
+    {:else}
+        <p>{queryResult.columns}</p>
+    {/if}
     <button on:click={runQuery}>Run Query</button>
 </div>
