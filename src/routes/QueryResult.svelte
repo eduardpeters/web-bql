@@ -19,7 +19,22 @@
     {#if !queryResult}
         <p>results table goes here</p>
     {:else}
-        <p>{queryResult.columns}</p>
+        <table>
+            <thead>
+                {#each queryResult.columns as column}
+                    <th>{column}</th>
+                {/each}
+            </thead>
+            <tbody>
+                {#each queryResult.rows as row}
+                    <tr>
+                        {#each row as cell}
+                            <td>{cell}</td>
+                        {/each}
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
     {/if}
     <button on:click={runQuery}>Run Query</button>
 </div>

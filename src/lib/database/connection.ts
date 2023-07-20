@@ -8,11 +8,10 @@ const query = async (dbFile: ArrayBuffer, queryString: string) => {
         console.log('Query data with exec()...');
         db.exec({
             sql: 'SELECT name FROM sqlite_master WHERE type = \'table\'',
-            columnNames: columns,
-            resultRows: rows,
+            callback: (row: string[]) => {
+                console.log(row);
+            }
         });
-        console.log(columns);
-        console.log(rows);
         console.log(queryString);
         db.exec({
             sql: queryString,
