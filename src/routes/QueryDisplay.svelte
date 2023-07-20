@@ -1,20 +1,8 @@
 <script lang="ts">
-    import { dbFile } from "$lib/stores/dbFile";
-
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
-    import query from "$lib/database/connection";
-
-    let queryElements: BlockContent[] = [];
-
-    const runQuery = () => {
-        if (!$dbFile || queryElements.length == 0) return;
-        let queryString = queryElements.map((e) => e.name).join(" ");
-        queryString += " pets";
-        console.log(queryString);
-        query($dbFile, queryString);
-    };
+    export let queryElements: BlockContent[];
 
     const handleDragOver = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
@@ -44,7 +32,6 @@
     {/if}
 </div>
 <button on:click={() => (queryElements = [])}>RESET</button>
-<button on:click={runQuery}>Run Query</button>
 
 <style>
     .queries_holder {

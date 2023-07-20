@@ -4,7 +4,7 @@
 
     import DbSelection from "./DBSelection.svelte";
     import BlockDisplay from "./BlockDisplay.svelte";
-    import QueryDisplay from "./QueryDisplay.svelte";
+    import CurrentQuery from "./CurrentQuery.svelte";
 
     onMount(async () => {
         const res = await fetch("/simplefolks.sqlite");
@@ -17,7 +17,7 @@
     <DbSelection />
     <div class="displays">
         <BlockDisplay />
-        <QueryDisplay />
+        <CurrentQuery />
     </div>
 </main>
 
