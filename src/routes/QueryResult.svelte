@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { dbFile } from "$lib/stores/dbFile";
+    import { dbFile } from "$lib/stores/dbStore";
     import type { BlockContent, QueryResult } from "$lib/appTypes";
     import query from "$lib/database/connection";
 

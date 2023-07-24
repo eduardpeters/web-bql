@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { dbFile } from "$lib/stores/dbFile";
+    import { dbFile } from "$lib/stores/dbStore";
     
     import { getColumns, getTables } from "$lib/database/dbUtils";
 
