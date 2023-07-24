@@ -9,8 +9,6 @@
     const runQuery = async () => {
         if (!$dbFile || queryElements.length == 0) return;
         let queryString = queryElements.map((e) => e.name).join(" ");
-        queryString += " pets";
-        console.log(queryString);
         queryResult = await query($dbFile, queryString);
     };
 </script>
