@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { dbFile } from "$lib/stores/dbStore";
-    
+    import { dbFile, tablesAndColumns } from "$lib/stores/dbStore";
+
     import { getColumns, getTables } from "$lib/database/dbUtils";
 
     import DbSelection from "./DBSelection.svelte";
@@ -13,7 +13,21 @@
         $dbFile = await res.arrayBuffer();
         const tables = await getTables($dbFile);
         console.log(tables);
-        tables?.forEach(async (table) => console.log(await getColumns($dbFile,table)));
+        const forStore = await Promise.all(
+            tables?.map(async (table) => {
+                const columnNames = await getColumns($dbFile, table);
+                const blockColumns = columnNames?.map((name) => ({
+                    name: name,
+                    type: "column",
+                }));
+                return {
+                    name: table,
+                    type: "table",
+                    columns: blockColumns,
+                };
+            })
+        );
+        console.log(forStore);
     });
 </script>
 
