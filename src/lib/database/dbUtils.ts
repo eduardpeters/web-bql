@@ -1,5 +1,21 @@
 import query from './connection';
 
+export const getDbBlocks = async (dbFile: ArrayBuffer) => {
+    const tables = await getTables(dbFile);
+    return (await Promise.all<any>(tables?.map(async (table) => {
+        const columnNames = await getColumns(dbFile, table);
+        const blockColumns = columnNames?.map((name) => ({
+            name: name,
+            type: "column",
+        }));
+        return {
+            name: table,
+            type: "table",
+            columns: blockColumns,
+        };
+    })));
+};
+
 export const getTables = async (dbFile: ArrayBuffer) => {
     const queryString = 'SELECT name FROM sqlite_master WHERE type = \'table\'';
     const result = await query(dbFile, queryString);

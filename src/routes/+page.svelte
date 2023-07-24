@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { dbFile, tablesAndColumns } from "$lib/stores/dbStore";
 
-    import { getColumns, getTables } from "$lib/database/dbUtils";
+    import { getDbBlocks } from "$lib/database/dbUtils";
 
     import DbSelection from "./DBSelection.svelte";
     import BlockDisplay from "./BlockDisplay.svelte";
@@ -11,22 +11,8 @@
     onMount(async () => {
         const res = await fetch("/simplefolks.sqlite");
         $dbFile = await res.arrayBuffer();
-        const tables = await getTables($dbFile);
-        console.log(tables);
-        const forStore = await Promise.all(
-            tables?.map(async (table) => {
-                const columnNames = await getColumns($dbFile, table);
-                const blockColumns = columnNames?.map((name) => ({
-                    name: name,
-                    type: "column",
-                }));
-                return {
-                    name: table,
-                    type: "table",
-                    columns: blockColumns,
-                };
-            })
-        );
+        const forStore = await getDbBlocks($dbFile);
+        $tablesAndColumns = forStore;
         console.log(forStore);
     });
 </script>
