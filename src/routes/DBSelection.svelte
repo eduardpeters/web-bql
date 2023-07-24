@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { dbFile } from "$lib/stores/dbStore";
+    import { dbFile, tablesAndColumns } from "$lib/stores/dbStore";
+    import { getDbBlocks } from "$lib/database/dbUtils";
 
     let input: HTMLInputElement;
 
@@ -8,8 +9,9 @@
         const newFile = input.files[0];
         if (!newFile) return;
         const r = new FileReader();
-        r.addEventListener("load", function onLoad() {
+        r.addEventListener("load", async function onLoad() {
             $dbFile = r.result as ArrayBuffer;
+            $tablesAndColumns = await getDbBlocks($dbFile);
             this.removeEventListener("load", onLoad);
         });
         r.readAsArrayBuffer(newFile);
