@@ -8,3 +8,12 @@ export const getTables = async (dbFile: ArrayBuffer) => {
         return (rows);
     }
 };
+
+export const getColumns = async (dbFile: ArrayBuffer, tableName: string) => {
+    const queryString = `SELECT * FROM ${tableName} LIMIT 0`;
+    const result = await query(dbFile, queryString);
+    if (result) {
+        const { columns, rows } = result;
+        return (columns);
+    }
+}

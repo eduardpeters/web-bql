@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { dbFile } from "$lib/stores/dbFile";
     
-    import { getTables } from "$lib/database/dbUtils";
+    import { getColumns, getTables } from "$lib/database/dbUtils";
 
     import DbSelection from "./DBSelection.svelte";
     import BlockDisplay from "./BlockDisplay.svelte";
@@ -11,7 +11,9 @@
     onMount(async () => {
         const res = await fetch("/simplefolks.sqlite");
         $dbFile = await res.arrayBuffer();
-        console.log(getTables($dbFile));
+        const tables = await getTables($dbFile);
+        console.log(tables);
+        tables?.forEach(async (table) => console.log(await getColumns($dbFile,table)));
     });
 </script>
 
