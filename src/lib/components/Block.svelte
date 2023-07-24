@@ -6,7 +6,9 @@
     const colors: Dictionary<string> = {
         keyword: '#57cc99',
         column: '#80ED99',
-    }
+        table: '#38A3A5',
+    };
+
     const handleDrag = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
         event.dataTransfer.setData("text/plain", JSON.stringify(keyword));

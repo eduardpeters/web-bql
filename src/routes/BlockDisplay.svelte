@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { tablesAndColumns } from "$lib/stores/dbStore";
+
     import Block from "$lib/components/Block.svelte";
 
     const keywords = [
@@ -25,15 +27,26 @@
     {#each keywords as keyword}
         <Block {keyword} />
     {/each}
+    {#if $tablesAndColumns}
+        {#each $tablesAndColumns as table}
+            <Block keyword={table} />
+            {#each table.columns as column}
+                <Block keyword={column} />
+            {/each}
+        {/each}
+    {/if}
 </div>
 
 <style>
     .keywords_holder {
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-evenly;
         border: 1px solid black;
         padding: 10px;
+        width: 30%;
+        max-height: 75vh;
     }
 </style>
