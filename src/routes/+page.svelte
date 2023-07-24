@@ -11,9 +11,7 @@
     onMount(async () => {
         const res = await fetch("/simplefolks.sqlite");
         $dbFile = await res.arrayBuffer();
-        const forStore = await getDbBlocks($dbFile);
-        $tablesAndColumns = forStore;
-        console.log(forStore);
+        $tablesAndColumns = await getDbBlocks($dbFile);
     });
 </script>
 
