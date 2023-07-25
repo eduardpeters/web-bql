@@ -15,12 +15,16 @@
     });
 </script>
 
-<h1>Welcome to Block Query Language</h1>
 <main class="container">
-    <DbSelection />
-    <div class="displays">
-        <BlockDisplay />
-        <CurrentQuery />
+    <h1>Welcome to Block Query Language</h1>
+    <div class="split_displays">
+        <div class="display_side">
+            <BlockDisplay />
+        </div>
+        <div class="display_side">
+            <DbSelection />
+            <CurrentQuery />
+        </div>
     </div>
 </main>
 
@@ -32,10 +36,18 @@
         justify-content: center;
         padding: 10px;
     }
-    .displays {
+
+    .display_side {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    .split_displays {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: center;
         width: 100%;
     }
 </style>
