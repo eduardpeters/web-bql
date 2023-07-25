@@ -40,13 +40,11 @@
 <style>
     .keywords_holder {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-evenly;
         border: 1px solid black;
-        padding: 10px;
-        width: 30%;
-        max-height: 75vh;
+        padding: 5px;
     }
 </style>
