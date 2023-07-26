@@ -16,30 +16,62 @@
     };
 </script>
 
-<div
-    role="textbox"
-    class="queries_holder"
-    tabindex="-1"
-    on:dragover|preventDefault={handleDragOver}
-    on:drop|preventDefault={handleDrop}
->
-    {#if queryElements.length > 0}
-        {#each queryElements as element}
-            <Block keyword={element} />
-        {/each}
-    {:else}
-        <p>Drop some keywords here to begin</p>
-    {/if}
+<div class="container">
+    <div
+        role="textbox"
+        class="query_holder"
+        tabindex="-1"
+        on:dragover|preventDefault={handleDragOver}
+        on:drop|preventDefault={handleDrop}
+    >
+        {#if queryElements.length > 0}
+            {#each queryElements as element}
+                <Block keyword={element} />
+            {/each}
+        {:else}
+            <p class="placeholder">Drop some keywords here to begin</p>
+        {/if}
+    </div>
+    <button on:click={() => (queryElements = [])}>RESET</button>
 </div>
-<button on:click={() => (queryElements = [])}>RESET</button>
 
 <style>
-    .queries_holder {
+    button {
+        all: unset;
+        background-color: #0582ca;
+        border-radius: 5px;
+        color: #eee;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    .container {
+        align-items: center;
         display: flex;
         flex-direction: row;
-        align-items: baseline;
-        justify-content: flex-start;
-        border: 1px solid black;
+        gap: 10px;
         padding: 10px;
+        width: 100%;
+    }
+
+    .placeholder {
+        color: #eee;
+        font-family: monospace;
+    }
+
+    .query_holder {
+        align-items: baseline;
+        background-color: #003554;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 10px;
+        width: 80%;
     }
 </style>
