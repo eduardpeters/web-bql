@@ -29,25 +29,27 @@
     {#if !queryResult}
         <p class="placeholder">Run a query to display results here</p>
     {:else}
-        <table>
-            <caption>
-                {queryString}
-            </caption>
-            <thead>
-                {#each queryResult.columns as column}
+        <div class="overflow_handled">
+            <table>
+                <caption>
+                    {queryString}
+                </caption>
+                <thead>
+                    {#each queryResult.columns as column}
                     <th>{column}</th>
-                {/each}
-            </thead>
-            <tbody>
-                {#each queryResult.rows as row}
+                    {/each}
+                </thead>
+                <tbody>
+                    {#each queryResult.rows as row}
                     <tr>
                         {#each row as cell}
-                            <td>{cell}</td>
+                        <td>{cell}</td>
                         {/each}
                     </tr>
-                {/each}
-            </tbody>
-        </table>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
     {/if}
 </div>
 
@@ -76,7 +78,6 @@
         border-collapse: collapse;
         table-layout: fixed;
         text-align: center;
-        width: 100%;
     }
 
     th {
@@ -102,6 +103,11 @@
         display: flex;
         flex-direction: column;
         padding: 10px;
+    }
+
+    .overflow_handled {
+        overflow-x: auto;
+        width: 100%;
     }
 
     .placeholder {
