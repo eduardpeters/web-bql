@@ -4,19 +4,25 @@
     import type { BlockContent, QueryResult } from "$lib/appTypes";
 
     export let queryElements: BlockContent[];
+    let queryString = "";
     let queryResult: QueryResult | undefined;
 
     const runQuery = async () => {
         if (!$dbFile || queryElements.length == 0) return;
-        let queryString = queryElements.map((e) => e.name).join(" ");
+        queryString = queryElements.map((e) => e.name).join(" ");
         queryResult = await query($dbFile, queryString);
     };
+
+    const handleReset = () => {
+        queryResult = undefined;
+        queryString = "";
+    }
 </script>
 
 <div class="container">
     <div class="query_controls">
         <button class="button_run" on:click={runQuery}>Run Query</button>
-        <button class="button_reset" on:click={() => (queryResult = undefined)}>
+        <button class="button_reset" on:click={handleReset}>
             Reset Result</button
         >
     </div>
@@ -24,6 +30,9 @@
         <p class="placeholder">Run a query to display results here</p>
     {:else}
         <table>
+            <caption>
+                {queryString}
+            </caption>
             <thead>
                 {#each queryResult.columns as column}
                     <th>{column}</th>
@@ -55,6 +64,31 @@
         opacity: 0.8;
     }
 
+    caption {
+        font-style: italic;
+        color: #999;
+        padding: 5px;
+    }
+
+    table {
+        border-bottom: 2px solid #000;
+        border-top: 2px solid #000;
+        border-collapse: collapse;
+        table-layout: fixed;
+        text-align: center;
+        width: 100%;
+    }
+
+    th {
+        background-color: #0582CA;
+        border-bottom: 2px solid #000;
+        color:#fff;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
     .button_run {
         background-color: #00a6fb;
     }
@@ -79,5 +113,6 @@
         flex-direction: row;
         justify-content: space-around;
         gap: 10px;
+        margin: 10px;
     }
 </style>
