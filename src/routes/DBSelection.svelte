@@ -70,9 +70,10 @@
     }
 
     input[type="file"]::file-selector-button {
-        background: #52b788;
+        background: #00A6FB;
         border: none;
         border-radius: 5px;
+        color: #eee;
         padding: 5px;
     }
     input[type="file"]::file-selector-button:hover {
@@ -107,8 +108,9 @@
     }
 
     .selected_db {
-        background-color: #52b788;
+        background-color: #00A6FB;
         border-radius: 5px;
+        color: #eee;
         padding: 5px;
     }
 

@@ -29,7 +29,7 @@
                 <Block keyword={element} />
             {/each}
         {:else}
-            <p class="placeholder">Drop some keywords here to begin</p>
+            <p class="placeholder">Drop some blocks here to begin</p>
         {/if}
     </div>
     <button on:click={() => (queryElements = [])}>RESET</button>
@@ -66,7 +66,7 @@
     .query_holder {
         align-items: baseline;
         background-color: #003554;
-        border: 1px solid black;
+        border-radius: 10px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
