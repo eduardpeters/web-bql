@@ -1,7 +1,7 @@
 <script lang="ts">
     import { dbFile } from "$lib/stores/dbStore";
-    import type { BlockContent, QueryResult } from "$lib/appTypes";
     import query from "$lib/database/connection";
+    import type { BlockContent, QueryResult } from "$lib/appTypes";
 
     export let queryElements: BlockContent[];
     let queryResult: QueryResult | undefined;
@@ -13,11 +13,15 @@
     };
 </script>
 
-<div>
-    <button on:click={runQuery}>Run Query</button>
-    <button on:click={() => queryResult = undefined}>Reset Result</button>
+<div class="container">
+    <div class="query_controls">
+        <button class="button_run" on:click={runQuery}>Run Query</button>
+        <button class="button_reset" on:click={() => (queryResult = undefined)}>
+            Reset Result</button
+        >
+    </div>
     {#if !queryResult}
-        <p>Run a query to display results</p>
+        <p class="placeholder">Run a query to display results here</p>
     {:else}
         <table>
             <thead>
@@ -37,3 +41,43 @@
         </table>
     {/if}
 </div>
+
+<style>
+    button {
+        all: unset;
+        border-radius: 5px;
+        color: #eee;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    .button_run {
+        background-color: #00a6fb;
+    }
+
+    .button_reset {
+        background-color: #0582ca;
+    }
+
+    .container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .placeholder {
+        font-weight: bold;
+    }
+
+    .query_controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 10px;
+    }
+</style>
