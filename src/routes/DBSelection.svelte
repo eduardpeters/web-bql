@@ -3,6 +3,15 @@
     import { getDbBlocks } from "$lib/database/dbUtils";
 
     let input: HTMLInputElement;
+    let isOnDragArea = false;
+
+    $: active_class = isOnDragArea ? "input_active" : "";
+
+    const handleDrop = (event: DragEvent) => {
+        if (!event || !event.dataTransfer) return;
+        input.files = event.dataTransfer.files;
+        handleUpload();
+    };
 
     const handleUpload = () => {
         if (!input.files) return;
@@ -28,7 +37,13 @@
                 Using default DB
             {/if}
         </div>
-        <label class="input_container">
+        <label
+            class="input_container {active_class}"
+            on:dragenter={() => (isOnDragArea = true)}
+            on:dragleave={() => (isOnDragArea = false)}
+            on:dragover|preventDefault
+            on:drop|preventDefault={handleDrop}
+        >
             <span class="input_title">Drop a SQLite DB here!</span>
             or
             <input
@@ -75,7 +90,8 @@
         align-items: center;
     }
 
-    .input_container:hover {
+    .input_container:hover,
+    .input_active {
         background-color: #eee;
     }
 
