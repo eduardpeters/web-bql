@@ -90,6 +90,10 @@
         padding: 5px;
     }
 
+    tr:hover {
+        background-color: #00a6fb44;
+    }
+
     .button_run {
         background-color: #00a6fb;
     }
@@ -106,6 +110,8 @@
     }
 
     .overflow_handled {
+        display: flex;
+        justify-content: center;
         overflow-x: auto;
         width: 100%;
     }
