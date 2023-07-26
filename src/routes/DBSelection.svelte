@@ -47,6 +47,7 @@
     }
 
     input[type="file"] {
+        background-color: #fff;
         border: 1px solid #000;
         border-radius: 10px;
         color: #444;
@@ -72,6 +73,10 @@
         gap: 10px;
         justify-content: center;
         align-items: center;
+    }
+
+    .input_container:hover {
+        background-color: #eee;
     }
 
     .input_title {
