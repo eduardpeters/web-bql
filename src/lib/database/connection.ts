@@ -5,15 +5,11 @@ const query = async (dbFile: ArrayBuffer, queryString: string) => {
     const columns: string[] = [];
     const rows: string[] = [];
     try {
-        console.log('Query data with exec()...');
-        console.log(queryString);
         db.exec({
             sql: queryString,
             columnNames: columns,
             resultRows: rows,
         });
-        console.log(columns);
-        console.log(rows);
         return ({
             columns,
             rows,
@@ -32,8 +28,6 @@ const query = async (dbFile: ArrayBuffer, queryString: string) => {
 const initializeDB = async (dbFile: ArrayBuffer) => {
     const sqlite3 = await sqlite3InitModule()
     try {
-        console.log('Initialized, run demo');
-        console.log('Running SQLite3 version', sqlite3.version.libVersion);
         const p = sqlite3.wasm.allocFromTypedArray(dbFile);
         const db = new sqlite3.oo1.DB();
         const rc = sqlite3.capi.sqlite3_deserialize(
