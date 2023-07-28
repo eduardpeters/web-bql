@@ -2,25 +2,7 @@
     import { tablesAndColumns } from "$lib/stores/dbStore";
 
     import Block from "$lib/components/Block.svelte";
-
-    const keywords = [
-        {
-            name: "SELECT",
-            type: "keyword",
-        },
-        {
-            name: "FROM",
-            type: "keyword",
-        },
-        {
-            name: "WHERE",
-            type: "keyword",
-        },
-        {
-            name: "*",
-            type: "column",
-        },
-    ];
+    import { keywords } from "$lib/keywords/keywords";
 </script>
 
 <div class="keywords_holder">
