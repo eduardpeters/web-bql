@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { BlockContent } from "$lib/appTypes";
-    import { tablesAndColumns } from "$lib/stores/dbStore";
     import Block from "$lib/components/Block.svelte";
 
     export let blocks: BlockContent[];
@@ -9,15 +8,12 @@
 <div class="keywords_holder">
     {#each blocks as block}
         <Block content={block} />
-    {/each}
-    {#if $tablesAndColumns}
-        {#each $tablesAndColumns as table}
-            <Block content={table} />
-            {#each table.columns as column}
+        {#if block.columns}
+            {#each block.columns as column}
                 <Block content={column} />
             {/each}
-        {/each}
-    {/if}
+        {/if}
+    {/each}
 </div>
 
 <style>
