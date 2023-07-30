@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { BlockContent, Dictionary } from "$lib/appTypes";
 
-    export let keyword: BlockContent;
+    export let content: BlockContent;
 
     const colors: Dictionary<string> = {
         keyword: '#57cc99',
@@ -11,20 +11,20 @@
 
     const handleDrag = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
-        event.dataTransfer.setData("text/plain", JSON.stringify(keyword));
+        event.dataTransfer.setData("text/plain", JSON.stringify(content));
         event.dataTransfer.dropEffect = "copy";
     };
 </script>
 
 <div
     class="block"
-    style="--block-color: {colors[keyword.type]}"
+    style="--block-color: {colors[content.type]}"
     role="textbox"
     tabindex="-1"
     draggable="true"
     on:dragstart={handleDrag}
 >
-    {keyword.name}
+    {content.name}
 </div>
 
 <style>
