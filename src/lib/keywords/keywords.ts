@@ -11,8 +11,4 @@ export const keywords = [
         name: "WHERE",
         type: "keyword",
     },
-    {
-        name: "*",
-        type: "column",
-    },
 ];

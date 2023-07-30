@@ -3,6 +3,7 @@
 
     import { tablesAndColumns } from "$lib/stores/dbStore";
     import { keywords } from "$lib/keywords/keywords";
+    import { symbols } from "$lib/keywords/symbols";
 
     enum BlockOptions {
         Keywords,
@@ -28,7 +29,7 @@
         } else if (blocksSelected === BlockOptions.TablesAndColumns) {
             blocksToDisplay = $tablesAndColumns;
         } else if (blocksSelected === BlockOptions.Symbols) {
-            console.log("No Symbols set yet");
+            blocksToDisplay = symbols;
         }
     };
 </script>
