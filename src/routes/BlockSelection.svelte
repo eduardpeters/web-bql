@@ -36,13 +36,25 @@
 
 <div class="container">
     <div class="selection_controls">
-        <button on:click={() => handleSelection(BlockOptions.Keywords)}>
+        <button
+            class="option"
+            class:selected={blocksSelected === BlockOptions.Keywords}
+            on:click={() => handleSelection(BlockOptions.Keywords)}
+        >
             SQL Keywords
         </button>
-        <button on:click={() => handleSelection(BlockOptions.TablesAndColumns)}>
+        <button
+            class="option"
+            class:selected={blocksSelected === BlockOptions.TablesAndColumns}
+            on:click={() => handleSelection(BlockOptions.TablesAndColumns)}
+        >
             Tables and Columns
         </button>
-        <button on:click={() => handleSelection(BlockOptions.Symbols)}>
+        <button
+            class="option"
+            class:selected={blocksSelected === BlockOptions.Symbols}
+            on:click={() => handleSelection(BlockOptions.Symbols)}
+        >
             Numbers and Symbols
         </button>
     </div>
@@ -51,8 +63,34 @@
 
 <style>
     .container {
+        align-items: center;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .option {
+        all: unset;
+        background-color: #00A6FB;
+        border-radius: 5px;
+        box-shadow: 3px 3px 1px #006494;
+        color: #eee;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .selected {
+        background-color: #0582CA;
+        box-shadow: none;
+        transform: translateX(2px) translateY(2px);
+    }
+
+    .selection_controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
     }
 </style>
