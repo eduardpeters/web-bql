@@ -18,12 +18,14 @@
 
 <style>
     .keywords_holder {
+        align-items: center;
+        border: 1px solid #051923;
+        border-radius: 10px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: center;
         justify-content: space-evenly;
-        border: 1px solid black;
         padding: 5px;
+        width: 95%;
     }
 </style>
