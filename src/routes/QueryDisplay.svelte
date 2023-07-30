@@ -26,7 +26,7 @@
     >
         {#if queryElements.length > 0}
             {#each queryElements as element}
-                <Block keyword={element} />
+                <Block content={element} />
             {/each}
         {:else}
             <p class="placeholder">Drop some blocks here to begin</p>
