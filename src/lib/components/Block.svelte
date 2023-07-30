@@ -4,9 +4,10 @@
     export let content: BlockContent;
 
     const colors: Dictionary<string> = {
-        keyword: '#57cc99',
-        column: '#80ED99',
-        table: '#38A3A5',
+        keyword: '#78C6A3',
+        column: '#67B99A',
+        table: '#14746F',
+        symbol: '#99E2B4',
     };
 
     const handleDrag = (event: DragEvent) => {
