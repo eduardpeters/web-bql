@@ -12,7 +12,19 @@ export const keywords = [
         type: "keyword",
     },
     {
-        name: "*",
-        type: "column",
+        name: "LIMIT",
+        type: "keyword",
+    },
+    {
+        name: "AND",
+        type: "keyword",
+    },
+    {
+        name: "OR",
+        type: "keyword",
+    },
+    {
+        name: "NOT",
+        type: "keyword",
     },
 ];

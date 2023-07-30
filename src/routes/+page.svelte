@@ -7,6 +7,7 @@
     import DbSelection from "./DBSelection.svelte";
     import BlockDisplay from "./BlockDisplay.svelte";
     import CurrentQuery from "./CurrentQuery.svelte";
+    import BlockSelection from "./BlockSelection.svelte";
 
     onMount(async () => {
         const res = await fetch("/simplefolks.sqlite");
@@ -19,7 +20,7 @@
     <h1>Welcome to Block Query Language</h1>
     <div class="split_displays">
         <div class="display_side">
-            <BlockDisplay />
+            <BlockSelection />
         </div>
         <div class="display_side">
             <DbSelection />

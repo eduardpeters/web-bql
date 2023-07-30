@@ -1,32 +1,31 @@
 <script lang="ts">
-    import { tablesAndColumns } from "$lib/stores/dbStore";
-
+    import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
-    import { keywords } from "$lib/keywords/keywords";
+
+    export let blocks: BlockContent[];
 </script>
 
 <div class="keywords_holder">
-    {#each keywords as keyword}
-        <Block {keyword} />
-    {/each}
-    {#if $tablesAndColumns}
-        {#each $tablesAndColumns as table}
-            <Block keyword={table} />
-            {#each table.columns as column}
-                <Block keyword={column} />
+    {#each blocks as block}
+        <Block content={block} />
+        {#if block.columns}
+            {#each block.columns as column}
+                <Block content={column} />
             {/each}
-        {/each}
-    {/if}
+        {/if}
+    {/each}
 </div>
 
 <style>
     .keywords_holder {
+        align-items: center;
+        border: 1px solid #051923;
+        border-radius: 10px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: center;
         justify-content: space-evenly;
-        border: 1px solid black;
         padding: 5px;
+        width: 95%;
     }
 </style>
