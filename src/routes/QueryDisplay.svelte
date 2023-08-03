@@ -3,12 +3,23 @@
     import Block from "$lib/components/Block.svelte";
 
     export let queryElements: BlockContent[];
+    let draggedElement: any;
 
-    const handleDrag = (event: DragEvent, content: BlockContent) => {
+    const handleDragStart = (event: DragEvent, content: BlockContent) => {
         if (!event || !event.dataTransfer) return;
         event.dataTransfer.setData("text/plain", JSON.stringify(content));
-        event.dataTransfer.dropEffect = "copy";
-    }; 
+        event.dataTransfer.dropEffect = "move";
+        draggedElement = { content, removed: false };
+    };
+
+    const handleDragEnd = (event: DragEvent, content: BlockContent) => {
+        if (!event || !event.dataTransfer) return;
+        console.log(event.dataTransfer);
+        if (event.dataTransfer.dropEffect === "none") {
+            console.log("dropped outside");
+            console.log(draggedElement);
+        }
+    }
 
     const handleDragOver = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
@@ -17,8 +28,18 @@
 
     const handleDrop = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
+        if (draggedElement && draggedElement.removed) {
+            console.log("This was originally here");
+            draggedElement = null;
+        }
         const data = JSON.parse(event.dataTransfer.getData("text/plain"));
         queryElements = [...queryElements, data];
+    };
+
+    const handleLeave = (event: DragEvent) => {
+        if (!event || !event.dataTransfer || !draggedElement) return;
+        draggedElement.removed = true;
+        console.log("block has left!", draggedElement);
     };
 </script>
 
@@ -29,10 +50,11 @@
         tabindex="-1"
         on:dragover|preventDefault={handleDragOver}
         on:drop|preventDefault={handleDrop}
+        on:dragleave|preventDefault={handleLeave}
     >
         {#if queryElements.length > 0}
             {#each queryElements as element}
-                <Block content={element} {handleDrag} />
+                <Block content={element} {handleDragStart} {handleDragEnd} />
             {/each}
         {:else}
             <p class="placeholder">Drop some blocks here to begin</p>
