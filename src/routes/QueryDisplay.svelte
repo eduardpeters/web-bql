@@ -19,7 +19,8 @@
             console.log("dropped outside");
             console.log(draggedElement);
         }
-    }
+        draggedElement = null;
+    };
 
     const handleDragOver = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
@@ -28,18 +29,19 @@
 
     const handleDrop = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
-        if (draggedElement && draggedElement.removed) {
-            console.log("This was originally here");
-            draggedElement = null;
-        }
+        if (draggedElement && draggedElement.removed) return;
         const data = JSON.parse(event.dataTransfer.getData("text/plain"));
         queryElements = [...queryElements, data];
     };
 
-    const handleLeave = (event: DragEvent) => {
+    const handleDragEnter = (event: DragEvent) => {
+        if (!event || !event.dataTransfer || !draggedElement) return;
+        draggedElement.removed = false;
+    };
+
+    const handleDragLeave = (event: DragEvent) => {
         if (!event || !event.dataTransfer || !draggedElement) return;
         draggedElement.removed = true;
-        console.log("block has left!", draggedElement);
     };
 </script>
 
@@ -50,7 +52,8 @@
         tabindex="-1"
         on:dragover|preventDefault={handleDragOver}
         on:drop|preventDefault={handleDrop}
-        on:dragleave|preventDefault={handleLeave}
+        on:dragenter|preventDefault={handleDragEnter}
+        on:dragleave|preventDefault={handleDragLeave}
     >
         {#if queryElements.length > 0}
             {#each queryElements as element}
