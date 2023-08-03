@@ -3,7 +3,7 @@
     import Block from "$lib/components/Block.svelte";
 
     export let queryElements: BlockContent[];
-    let draggedElement: any;
+    let draggedElement: { content: BlockContent; removed: boolean } | null;
 
     const handleDragStart = (event: DragEvent, content: BlockContent) => {
         if (!event || !event.dataTransfer) return;
@@ -14,10 +14,10 @@
 
     const handleDragEnd = (event: DragEvent, content: BlockContent) => {
         if (!event || !event.dataTransfer) return;
-        console.log(event.dataTransfer);
         if (event.dataTransfer.dropEffect === "none") {
-            console.log("dropped outside");
-            console.log(draggedElement);
+            queryElements = queryElements.filter(
+                (element) => element !== content
+            );
         }
         draggedElement = null;
     };
@@ -29,7 +29,7 @@
 
     const handleDrop = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
-        if (draggedElement && draggedElement.removed) return;
+        if (draggedElement) return;
         const data = JSON.parse(event.dataTransfer.getData("text/plain"));
         queryElements = [...queryElements, data];
     };
