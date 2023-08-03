@@ -2,18 +2,14 @@
     import type { BlockContent, Dictionary } from "$lib/appTypes";
 
     export let content: BlockContent;
+    export let handleDragStart: (event: DragEvent, content: BlockContent) => void;
+    export let handleDragEnd: (event: DragEvent, content: BlockContent) => void = () => {};
 
     const colors: Dictionary<string> = {
         keyword: '#78C6A3',
         column: '#67B99A',
         table: '#14746F',
         symbol: '#99E2B4',
-    };
-
-    const handleDrag = (event: DragEvent) => {
-        if (!event || !event.dataTransfer) return;
-        event.dataTransfer.setData("text/plain", JSON.stringify(content));
-        event.dataTransfer.dropEffect = "copy";
     };
 </script>
 
@@ -23,7 +19,8 @@
     role="textbox"
     tabindex="-1"
     draggable="true"
-    on:dragstart={handleDrag}
+    on:dragstart={(event) => handleDragStart(event, content)}
+    on:dragend={(event) => handleDragEnd(event, content)}
 >
     {content.name}
 </div>
