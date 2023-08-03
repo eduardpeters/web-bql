@@ -3,14 +3,20 @@
     import Block from "$lib/components/Block.svelte";
 
     export let blocks: BlockContent[];
+
+    const handleDrag = (event: DragEvent, content: BlockContent) => {
+        if (!event || !event.dataTransfer) return;
+        event.dataTransfer.setData("text/plain", JSON.stringify(content));
+        event.dataTransfer.dropEffect = "copy";
+    };
 </script>
 
 <div class="keywords_holder">
     {#each blocks as block}
-        <Block content={block} />
+        <Block content={block} {handleDrag} />
         {#if block.columns}
             {#each block.columns as column}
-                <Block content={column} />
+                <Block content={column} {handleDrag} />
             {/each}
         {/if}
     {/each}
