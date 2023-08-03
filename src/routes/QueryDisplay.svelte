@@ -4,6 +4,12 @@
 
     export let queryElements: BlockContent[];
 
+    const handleDrag = (event: DragEvent, content: BlockContent) => {
+        if (!event || !event.dataTransfer) return;
+        event.dataTransfer.setData("text/plain", JSON.stringify(content));
+        event.dataTransfer.dropEffect = "copy";
+    }; 
+
     const handleDragOver = (event: DragEvent) => {
         if (!event || !event.dataTransfer) return;
         event.dataTransfer.dropEffect = "copy";
@@ -26,7 +32,7 @@
     >
         {#if queryElements.length > 0}
             {#each queryElements as element}
-                <Block content={element} />
+                <Block content={element} {handleDrag} />
             {/each}
         {:else}
             <p class="placeholder">Drop some blocks here to begin</p>
