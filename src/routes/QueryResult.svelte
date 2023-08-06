@@ -1,6 +1,7 @@
 <script lang="ts">
     import { dbFile } from "$lib/stores/dbStore";
     import query from "$lib/database/connection";
+    import queryParser from "$lib/utils/queryParser";
     import type { BlockContent, QueryResult } from "$lib/appTypes";
 
     export let queryElements: BlockContent[];
@@ -8,15 +9,16 @@
     let queryResult: QueryResult | undefined;
 
     const runQuery = async () => {
-        if (!$dbFile || queryElements.length == 0) return;
-        queryString = queryElements.map((e) => e.name).join(" ");
+        if (!$dbFile || queryElements.length === 0) return;
+        queryString = queryParser(queryElements);
+        if (queryString.length === 0) return;
         queryResult = await query($dbFile, queryString);
     };
 
     const handleReset = () => {
         queryResult = undefined;
         queryString = "";
-    }
+    };
 </script>
 
 <div class="container">
@@ -36,16 +38,16 @@
                 </caption>
                 <thead>
                     {#each queryResult.columns as column}
-                    <th>{column}</th>
+                        <th>{column}</th>
                     {/each}
                 </thead>
                 <tbody>
                     {#each queryResult.rows as row}
-                    <tr>
-                        {#each row as cell}
-                        <td>{cell}</td>
-                        {/each}
-                    </tr>
+                        <tr>
+                            {#each row as cell}
+                                <td>{cell}</td>
+                            {/each}
+                        </tr>
                     {/each}
                 </tbody>
             </table>
@@ -81,12 +83,13 @@
     }
 
     th {
-        background-color: #0582CA;
+        background-color: #0582ca;
         border-bottom: 2px solid #000;
-        color:#fff;
+        color: #fff;
     }
 
-    th, td {
+    th,
+    td {
         padding: 5px;
     }
 
