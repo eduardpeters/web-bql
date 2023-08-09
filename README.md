@@ -20,3 +20,6 @@ It is being developed as a SvelteKit project (the author's first).
 Contributions are encouraged as the project can benefit from any help available (and me as a developer from learning from others). Issues are constantly being added as development progresses and things get noticed. The best is being done to close them off, but it'd be awesome to see this grow beyond a single developer project and see contributions come in. 
 
 Please let me know if you'd like to work on an issue to have it assigned and then make a pull request from a fork of the repo.
+
+## Local Setup
+Clone the repository and `cd` into it. Run `npm install` to install all dependencies and finally running `npm run dev` will start the development server. Once it starts up successfully you will be able to access it in your browser at [http://localhost:5173/](http://localhost:5173/)
