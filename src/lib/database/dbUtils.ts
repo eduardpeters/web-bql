@@ -1,22 +1,27 @@
+import type { BlockContent } from '$lib/appTypes';
 import query from './connection';
 
 export const getDbBlocks = async (dbFile: ArrayBuffer) => {
+    const blocks: BlockContent[] = [];
     const tables = await getTables(dbFile);
-    return (await Promise.all<any>(tables?.map(async (table) => {
-        const columnNames = await getColumns(dbFile, table);
-        const blockColumns = columnNames?.map((name) => ({
-            id: `${name}-c-${Math.round(Math.random() * 1000)}`,
-            name: name,
-            type: "column",
-        }));
-        return {
+    tables?.forEach(async (table) => {
+        blocks.push({
             id: `${table}-t-${Math.round(Math.random() * 1000)}`,
             name: table,
             type: "table",
-            columns: blockColumns,
-        };
-    })));
-};
+        });
+        const columns = await getColumns(dbFile, table);
+        columns?.forEach((column) => {
+            blocks.push({
+                id: `${column}-c-${Math.round(Math.random() * 1000)}`,
+                name: column,
+                type: "column",
+            })
+        });
+    });
+    console.log(blocks);
+    return blocks;
+}
 
 export const getTables = async (dbFile: ArrayBuffer) => {
     const queryString = 'SELECT name FROM sqlite_master WHERE type = \'table\'';

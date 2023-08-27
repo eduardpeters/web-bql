@@ -24,11 +24,6 @@
 >
     {#each blocks as block (block.id)}
         <Block content={block} />
-        {#if block.columns}
-            {#each block.columns as column (column.id)}
-                <Block content={column} />
-            {/each}
-        {/if}
     {/each}
 </div>
 
