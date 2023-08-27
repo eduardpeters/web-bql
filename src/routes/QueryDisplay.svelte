@@ -13,6 +13,7 @@
     const handleFinalize = (event: any) => {
         console.log(event);
         queryElements = event.detail.items;
+        console.log(queryElements);
     };
 </script>
 
@@ -28,7 +29,7 @@
         on:consider={handleConsider}
         on:finalize={handleFinalize}
     >
-        {#each queryElements as element}
+        {#each queryElements as element(element.id)}
             <Block content={element} />
         {/each}
     </div>
