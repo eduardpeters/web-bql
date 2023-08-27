@@ -5,10 +5,12 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
     return (await Promise.all<any>(tables?.map(async (table) => {
         const columnNames = await getColumns(dbFile, table);
         const blockColumns = columnNames?.map((name) => ({
+            id: `${name}-c-${Math.round(Math.random() * 1000)}`,
             name: name,
             type: "column",
         }));
         return {
+            id: `${table}-t-${Math.round(Math.random() * 1000)}`,
             name: table,
             type: "table",
             columns: blockColumns,
