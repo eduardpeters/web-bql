@@ -5,7 +5,6 @@
     import { getDbBlocks } from "$lib/database/dbUtils";
 
     import DbSelection from "./DBSelection.svelte";
-    import BlockDisplay from "./BlockDisplay.svelte";
     import CurrentQuery from "./CurrentQuery.svelte";
     import BlockSelection from "./BlockSelection.svelte";
 
