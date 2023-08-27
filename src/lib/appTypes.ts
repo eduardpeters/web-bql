@@ -4,7 +4,6 @@ export type BlockContent = {
     id: string,
     name: string;
     type: string;
-    columns?: BlockContent[];
 };
 
 export type QueryResult = {
