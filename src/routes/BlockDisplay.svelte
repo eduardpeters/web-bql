@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { dndzone } from "svelte-dnd-action";
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
@@ -9,11 +10,37 @@
         event.dataTransfer.setData("text/plain", JSON.stringify(content));
         event.dataTransfer.dropEffect = "copy";
     };
+
+    const handleConsider = (event: any) => {
+        console.log(event);
+        blocks = event.detail.items;
+    };
+
+    const handleFinalize = (event: any) => {
+        console.log(event);
+        blocks = event.detail.items;
+    };
 </script>
 
 <div class="keywords_holder">
     {#each blocks as block}
         <Block content={block} {handleDragStart} />
+        {#if block.columns}
+            {#each block.columns as column}
+                <Block content={column} {handleDragStart} />
+            {/each}
+        {/if}
+    {/each}
+</div>
+<p>DND re-implementation</p>
+<div
+    class="keywords_holder"
+    use:dndzone={{ items: blocks }}
+    on:consider={handleConsider}
+    on:finalize={handleFinalize}
+>
+    {#each blocks as block (block.id)}
+        <Block content={block} />
         {#if block.columns}
             {#each block.columns as column}
                 <Block content={column} {handleDragStart} />
