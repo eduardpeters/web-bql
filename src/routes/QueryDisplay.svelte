@@ -1,9 +1,20 @@
 <script lang="ts">
+    import { dndzone } from "svelte-dnd-action";
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
     export let queryElements: BlockContent[];
     let draggedElement: { content: BlockContent; removed: boolean } | null;
+
+    const handleConsider = (event: any) => {
+        console.log(event);
+        queryElements = event.detail.items;
+    };
+
+    const handleFinalize = (event: any) => {
+        console.log(event);
+        queryElements = event.detail.items;
+    };
 
     const handleDragStart = (event: DragEvent, content: BlockContent) => {
         if (!event || !event.dataTransfer) return;
@@ -62,6 +73,25 @@
         {:else}
             <p class="placeholder">Drop some blocks here to begin</p>
         {/if}
+    </div>
+    <button on:click={() => (queryElements = [])}>RESET</button>
+</div>
+<p>DND re-implementation</p>
+<div class="container">
+    {#if queryElements.length <= 0}
+        <p class="placeholder">Drop some blocks here to begin</p>
+    {/if}
+    <div
+        role="textbox"
+        class="query_holder"
+        tabindex="-1"
+        use:dndzone={{ items: queryElements }}
+        on:consider={handleConsider}
+        on:finalize={handleFinalize}
+    >
+        {#each queryElements as element}
+            <Block content={element} />
+        {/each}
     </div>
     <button on:click={() => (queryElements = [])}>RESET</button>
 </div>
