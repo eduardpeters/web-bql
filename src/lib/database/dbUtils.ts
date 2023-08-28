@@ -4,21 +4,21 @@ import query from './connection';
 export const getDbBlocks = async (dbFile: ArrayBuffer) => {
     const blocks: BlockContent[] = [];
     const tables = await getTables(dbFile);
-    tables?.forEach(async (table) => {
+    for (let i = 0; i < tables?.length; i++) {
         blocks.push({
-            id: `${table}-t-${Math.round(Math.random() * 1000)}`,
-            name: table,
+            id: `${tables[i]}-t-${Math.round(Math.random() * 1000)}`,
+            name: tables[i],
             type: "table",
         });
-        const columns = await getColumns(dbFile, table);
-        columns?.forEach((column) => {
+        const columns = await getColumns(dbFile, tables[i]);
+        for (let j = 0; j < columns?.length; j++) {
             blocks.push({
-                id: `${column}-c-${Math.round(Math.random() * 1000)}`,
-                name: column,
+                id: `${columns[j]}-c-${Math.round(Math.random() * 1000)}`,
+                name: columns[j],
                 type: "column",
-            })
-        });
-    });
+            });
+        }
+    };
     console.log(blocks);
     return blocks;
 }
