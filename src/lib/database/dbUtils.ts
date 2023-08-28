@@ -4,6 +4,9 @@ import query from './connection';
 export const getDbBlocks = async (dbFile: ArrayBuffer) => {
     const blocks: BlockContent[] = [];
     const tables = await getTables(dbFile);
+    if (!tables) {
+        return blocks;
+    }
     for (let i = 0; i < tables?.length; i++) {
         blocks.push({
             id: `${tables[i]}-t-${Math.round(Math.random() * 1000)}`,
@@ -11,6 +14,9 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
             type: "table",
         });
         const columns = await getColumns(dbFile, tables[i]);
+        if (!columns) {
+            break;
+        }
         for (let j = 0; j < columns?.length; j++) {
             blocks.push({
                 id: `${columns[j]}-c-${Math.round(Math.random() * 1000)}`,
@@ -19,7 +25,6 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
             });
         }
     };
-    console.log(blocks);
     return blocks;
 }
 
