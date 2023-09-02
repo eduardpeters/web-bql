@@ -12,10 +12,8 @@
     let ignoreDndEvents = false;
 
     const handleConsider = (event: any) => {
-        console.log(event);
         const { trigger, id } = event.detail.info;
         if (trigger === TRIGGERS.DRAG_STARTED) {
-            console.warn("generating copy for", id);
             const index = blocks.findIndex((block) => block.id === id);
             const newId = `${id}_copy_${Math.round(Math.random() * 1000)}`;
             event.detail.items = event.detail.items.filter(
@@ -35,7 +33,6 @@
     };
 
     const handleFinalize = (event: any) => {
-        console.log(event);
         if (!ignoreDndEvents) {
             blocks = event.detail.items;
         } else {
