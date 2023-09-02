@@ -19,7 +19,7 @@
             const index = blocks.findIndex((block) => block.id === id);
             const newId = `${id}_copy_${Math.round(Math.random() * 1000)}`;
             event.detail.items = event.detail.items.filter(
-                (item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]
+                (item: Item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]
             );
             event.detail.items.splice(index, 0, {
                 ...blocks[index],
