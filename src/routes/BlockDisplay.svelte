@@ -1,18 +1,44 @@
 <script lang="ts">
-    import { dndzone } from "svelte-dnd-action";
+    import {
+        dndzone,
+        TRIGGERS,
+        SHADOW_ITEM_MARKER_PROPERTY_NAME,
+    } from "svelte-dnd-action";
     import type { BlockContent } from "$lib/appTypes";
     import Block from "$lib/components/Block.svelte";
 
     export let blocks: BlockContent[];
 
+    let ignoreDndEvents = false;
+
     const handleConsider = (event: any) => {
-        console.log(event);
-        blocks = event.detail.items;
+        const { trigger, id } = event.detail.info;
+        if (trigger === TRIGGERS.DRAG_STARTED) {
+            const index = blocks.findIndex((block) => block.id === id);
+            const newId = `${id}_copy_${Math.round(Math.random() * 1000)}`;
+            event.detail.items = event.detail.items.filter(
+                (item: Item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]
+            );
+            event.detail.items.splice(index, 0, {
+                ...blocks[index],
+                id: newId,
+            });
+            blocks = event.detail.items;
+            ignoreDndEvents = true;
+        } else if (!ignoreDndEvents) {
+            blocks = event.detail.items;
+        } else {
+            blocks = [...blocks];
+        }
     };
 
     const handleFinalize = (event: any) => {
-        console.log(event);
-        blocks = event.detail.items;
+        if (!ignoreDndEvents) {
+            blocks = event.detail.items;
+        } else {
+            blocks = [...blocks];
+            ignoreDndEvents = false;
+        }
     };
 </script>
 
