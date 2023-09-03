@@ -3,7 +3,7 @@
 </script>
 
 <div class="container">
-    <div>
+    <div class="title__container">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
@@ -13,13 +13,13 @@
         >
             <path
                 fill="none"
-                stroke="#000"
+                stroke="#bb1a1a"
                 stroke-width="2"
                 stroke-miterlimit="10"
                 d="M23 27H11c-1.1 0-2-.9-2-2V8h16v17c0 1.1-.9 2-2 2zm4-19H7m7 0V6c0-.6.4-1 1-1h4c.6 0 1 .4 1 1v2m-3 15V12m4 11V12m-8 11V12"
             />
         </svg>
-        <p>Block disposal zone</p>
+        <p class="zone-title">Block disposal zone</p>
     </div>
     <div class="delete__dropzone" />
 </div>
@@ -28,14 +28,26 @@
     .container {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-end;
         gap: 10px;
+        padding: 10px;
     }
 
     .delete__dropzone {
         background-color: #bb1a1a;
         border-radius: 10px;
-        height: 100%;
-        width: 50%;
+        width: 20%;
+    }
+
+    .title__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .zone-title {
+        color: #bb1a1a;
+        font-family: monospace;
+        margin: 0;
     }
 </style>
