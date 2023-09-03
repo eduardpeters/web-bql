@@ -11,9 +11,11 @@
 
     let ignoreDndEvents = false;
 
-    const handleConsider = (event: any) => {
+    const handleConsider = (event: CustomEvent) => {
         const { trigger, id } = event.detail.info;
-        if (trigger === TRIGGERS.DRAG_STARTED) {
+        if (trigger === TRIGGERS.DRAGGED_ENTERED) {
+            ignoreDndEvents = true;
+        } else if (trigger === TRIGGERS.DRAG_STARTED) {
             const index = blocks.findIndex((block) => block.id === id);
             const newId = `${id}_copy_${Math.round(Math.random() * 1000)}`;
             event.detail.items = event.detail.items.filter(
@@ -32,7 +34,7 @@
         }
     };
 
-    const handleFinalize = (event: any) => {
+    const handleFinalize = (event: CustomEvent) => {
         if (!ignoreDndEvents) {
             blocks = event.detail.items;
         } else {
