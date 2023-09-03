@@ -5,12 +5,12 @@
 
     export let queryElements: BlockContent[];
 
-    const handleConsider = (event: any) => {
+    const handleConsider = (event: CustomEvent) => {
         console.log(event);
         queryElements = event.detail.items;
     };
 
-    const handleFinalize = (event: any) => {
+    const handleFinalize = (event: CustomEvent) => {
         console.log(event);
         queryElements = event.detail.items;
         console.log(queryElements);
@@ -29,7 +29,7 @@
         on:consider={handleConsider}
         on:finalize={handleFinalize}
     >
-        {#each queryElements as element(element.id)}
+        {#each queryElements as element (element.id)}
             <Block content={element} />
         {/each}
     </div>

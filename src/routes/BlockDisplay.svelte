@@ -11,8 +11,7 @@
 
     let ignoreDndEvents = false;
 
-    const handleConsider = (event: any) => {
-        console.log("BlockDisplay", event);
+    const handleConsider = (event: CustomEvent) => {
         const { trigger, id } = event.detail.info;
         if (trigger === TRIGGERS.DRAGGED_ENTERED) {
             ignoreDndEvents = true;
@@ -35,8 +34,7 @@
         }
     };
 
-    const handleFinalize = (event: any) => {
-        console.log("BlockDisplay", event);
+    const handleFinalize = (event: CustomEvent) => {
         if (!ignoreDndEvents) {
             blocks = event.detail.items;
         } else {
