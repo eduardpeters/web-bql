@@ -1,5 +1,17 @@
 <script lang="ts">
-    let blocks = [];
+    import type { BlockContent } from "$lib/appTypes";
+    import Block from "$lib/components/Block.svelte";
+    import { dndzone } from "svelte-dnd-action";
+
+    let blocks: BlockContent[] = [];
+
+    const handleConsider = (event: CustomEvent) => {
+        blocks = event.detail.items;
+    };
+
+    const handleFinalize = (event: CustomEvent) => {
+        blocks = [];
+    };
 </script>
 
 <div class="container">
@@ -21,7 +33,16 @@
         </svg>
         <p class="zone-title">Block disposal zone</p>
     </div>
-    <div class="delete__dropzone" />
+    <div
+        class="delete__dropzone"
+        use:dndzone={{ items: blocks }}
+        on:consider={handleConsider}
+        on:finalize={handleFinalize}
+    >
+        {#each blocks as block (block.id)}
+            <Block content={block} />
+        {/each}
+    </div>
 </div>
 
 <style>

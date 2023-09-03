@@ -11,7 +11,6 @@
 
     const handleFinalize = (event: CustomEvent) => {
         queryElements = event.detail.items;
-        console.log(queryElements);
     };
 </script>
 
