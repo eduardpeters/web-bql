@@ -2,12 +2,14 @@
     import QueryDisplay from "./QueryDisplay.svelte";
     import type { BlockContent } from "$lib/appTypes";
     import QueryResult from "./QueryResult.svelte";
+    import BlockDelete from "./BlockDelete.svelte";
 
     let queryElements: BlockContent[] = [];
 </script>
 
 <div class="container">
     <QueryDisplay bind:queryElements />
+    <BlockDelete />
     <QueryResult bind:queryElements />
 </div>
 

@@ -24,8 +24,9 @@
     .block {
         background-color: var(--block-color);
         border-radius: 5px;
+        cursor: grab;
         margin: 5px;
         padding: 5px;
-        cursor: grab;
+        width: fit-content;
     }
 </style>
