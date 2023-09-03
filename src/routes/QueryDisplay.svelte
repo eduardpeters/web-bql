@@ -6,12 +6,10 @@
     export let queryElements: BlockContent[];
 
     const handleConsider = (event: CustomEvent) => {
-        console.log(event);
         queryElements = event.detail.items;
     };
 
     const handleFinalize = (event: CustomEvent) => {
-        console.log(event);
         queryElements = event.detail.items;
         console.log(queryElements);
     };
