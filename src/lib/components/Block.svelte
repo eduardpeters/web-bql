@@ -8,6 +8,7 @@
         column: "#67B99A",
         table: "#14746F",
         symbol: "#99E2B4",
+        number: "#469D89",
     };
 </script>
 
