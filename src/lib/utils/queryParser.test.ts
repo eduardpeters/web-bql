@@ -43,7 +43,7 @@ const testArrayTwo = [
     },
     {
         name: "5",
-        type: "symbol",
+        type: "number",
     },
 ];
 
@@ -51,11 +51,11 @@ const testArrayThree = [
     ...testArrayTwo,
     {
         name: "0",
-        type: "symbol",
+        type: "number",
     },
     {
         name: "2",
-        type: "symbol",
+        type: "number",
     },
 ];
 
@@ -79,19 +79,19 @@ const testArrayFour = [
     },
     {
         name: "1",
-        type: "symbol",
+        type: "number",
     },
     {
         name: "2",
-        type: "symbol",
+        type: "number",
     },
     {
         name: "3",
-        type: "symbol",
+        type: "number",
     },
     {
         name: "4",
-        type: "symbol",
+        type: "number",
     },
     {
         name: "LIMIT",
@@ -99,7 +99,7 @@ const testArrayFour = [
     },
     {
         name: "3",
-        type: "symbol",
+        type: "number",
     },
 ]
 
@@ -120,5 +120,5 @@ test('Multiple symbols ', () => {
 });
 
 test('Multiple symbols and keywords mix', () => {
-    expect(queryParser(testArrayFour)).toBe('SELECT * FROM thistable WHERE acolumn <=1234 LIMIT 3');
+    expect(queryParser(testArrayFour)).toBe('SELECT * FROM thistable WHERE acolumn <= 1234 LIMIT 3');
 });
