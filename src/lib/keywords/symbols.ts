@@ -1,72 +1,74 @@
+import { BlockTypes } from "$lib/appTypes";
+
 export const symbols = [
     {
         id: "TKor0",
         name: "*",
-        type: "column",
+        type: BlockTypes.column,
     },
     {
         id: "GNBeh",
         name: "0",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "MIwiC",
         name: "1",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "gKj6m",
         name: "2",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "cP51T",
         name: "3",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "5KRez",
         name: "4",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "zDnDj",
         name: "5",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "pbBQJ",
         name: "6",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "2nwTu",
         name: "7",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "ZbmRY",
         name: "8",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "yFqwv",
         name: "9",
-        type: "number",
+        type: BlockTypes.number,
     },
     {
         id: "qAXrk",
         name: "=",
-        type: "symbol",
+        type: BlockTypes.symbol,
     },
     {
         id: "4Z3gv",
         name: "<",
-        type: "symbol",
+        type: BlockTypes.symbol,
     },
     {
         id: "Ovkoo",
         name: ">",
-        type: "symbol",
+        type: BlockTypes.symbol,
     },
 ];
