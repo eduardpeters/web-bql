@@ -1,6 +1,9 @@
 <script lang="ts">
-    import type { BlockContent, Dictionary } from "$lib/appTypes";
-    import { BlockTypes } from "$lib/appTypes";
+    import {
+        BlockTypes,
+        type BlockContent,
+        type Dictionary,
+    } from "$lib/appTypes";
 
     export let content: BlockContent;
 
