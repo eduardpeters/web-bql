@@ -1,37 +1,39 @@
+import { BlockTypes } from "$lib/appTypes";
+
 export const keywords = [
     {
         id: "g8lY8",
         name: "SELECT",
-        type: "keyword",
+        type: BlockTypes.keyword,
     },
     {
         id: "9Gujj",
         name: "FROM",
-        type: "keyword",
+        type: BlockTypes.keyword,
     },
     {
         id: "Iyr6P",
         name: "WHERE",
-        type: "keyword",
+        type: BlockTypes.keyword,
     },
     {
         id: "KQLN4",
         name: "LIMIT",
-        type: "keyword",
+        type: BlockTypes.keyword,
     },
     {
         id: "pYFvt",
         name: "AND",
-        type: "keyword",
+        type: BlockTypes.keyword,
     },
     {
         id: "yaBwB",
         name: "OR",
-        type: "keyword",
+        type: BlockTypes.keyword,
     },
     {
         id: "ztpCb",
         name: "NOT",
-        type: "keyword",
+        type: BlockTypes.keyword,
     },
 ];

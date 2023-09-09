@@ -1,4 +1,4 @@
-import type { BlockContent } from '$lib/appTypes';
+import { BlockTypes, type BlockContent } from '$lib/appTypes';
 import query from './connection';
 
 export const getDbBlocks = async (dbFile: ArrayBuffer) => {
@@ -11,7 +11,7 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
         blocks.push({
             id: `${tables[i]}-t-${Math.round(Math.random() * 1000)}`,
             name: tables[i],
-            type: "table",
+            type: BlockTypes.table,
         });
         const columns = await getColumns(dbFile, tables[i]);
         if (!columns) {
@@ -21,7 +21,7 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
             blocks.push({
                 id: `${columns[j]}-c-${Math.round(Math.random() * 1000)}`,
                 name: columns[j],
-                type: "column",
+                type: BlockTypes.column,
             });
         }
     };

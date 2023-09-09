@@ -1,14 +1,18 @@
 <script lang="ts">
-    import type { BlockContent, Dictionary } from "$lib/appTypes";
+    import {
+        BlockTypes,
+        type BlockContent,
+        type Dictionary,
+    } from "$lib/appTypes";
 
     export let content: BlockContent;
 
     const colors: Dictionary<string> = {
-        keyword: "#78C6A3",
-        column: "#67B99A",
-        table: "#14746F",
-        symbol: "#99E2B4",
-        number: "#469D89",
+        [BlockTypes.keyword]: "#78C6A3",
+        [BlockTypes.column]: "#67B99A",
+        [BlockTypes.table]: "#14746F",
+        [BlockTypes.symbol]: "#99E2B4",
+        [BlockTypes.number]: "#469D89",
     };
 </script>
 
