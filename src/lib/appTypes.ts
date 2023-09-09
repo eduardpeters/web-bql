@@ -11,7 +11,7 @@ export enum BlockTypes {
 export type BlockContent = {
     id: string,
     name: string;
-    type: string;
+    type: BlockTypes;
 };
 
 export type QueryResult = {
