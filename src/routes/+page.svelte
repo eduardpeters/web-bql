@@ -5,7 +5,7 @@
 	import { getDbBlocks } from '$lib/database/dbUtils';
 
 	import DbSelection from './DBSelection.svelte';
-	import CurrentQuery from './CurrentQuery.svelte';
+	import CurrentQuery from '../lib/components/queries/CurrentQuery.svelte';
 	import BlockSelection from '../lib/components/blocks/BlockSelection.svelte';
 
 	onMount(async () => {
