@@ -6,7 +6,7 @@
 
 	import DbSelection from './DBSelection.svelte';
 	import CurrentQuery from './CurrentQuery.svelte';
-	import BlockSelection from './BlockSelection.svelte';
+	import BlockSelection from '../lib/components/blocks/BlockSelection.svelte';
 
 	onMount(async () => {
 		const res = await fetch('/simplefolks.sqlite');

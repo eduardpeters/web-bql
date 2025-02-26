@@ -2,7 +2,7 @@
 	import QueryDisplay from './QueryDisplay.svelte';
 	import type { BlockContent } from '$lib/appTypes';
 	import QueryResult from './QueryResult.svelte';
-	import BlockDelete from './BlockDelete.svelte';
+	import BlockDelete from '../lib/components/blocks/BlockDelete.svelte';
 
 	let queryElements: BlockContent[] = [];
 </script>

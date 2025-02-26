@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { BlockContent } from '$lib/appTypes';
-	import Block from '$lib/components/Block.svelte';
+	import Block from '$lib/components/blocks/Block.svelte';
 	import { dndzone } from 'svelte-dnd-action';
 
 	let blocks: BlockContent[] = [];

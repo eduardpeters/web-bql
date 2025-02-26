@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { dndzone, TRIGGERS, SHADOW_ITEM_MARKER_PROPERTY_NAME } from 'svelte-dnd-action';
 	import type { BlockContent } from '$lib/appTypes';
-	import Block from '$lib/components/Block.svelte';
+	import Block from '$lib/components/blocks/Block.svelte';
 
 	export let blocks: BlockContent[];
 
