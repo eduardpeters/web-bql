@@ -4,9 +4,9 @@
 
 	import { getDbBlocks } from '$lib/database/dbUtils';
 
-	import DbSelection from './DBSelection.svelte';
-	import CurrentQuery from '../lib/components/queries/CurrentQuery.svelte';
-	import BlockSelection from '../lib/components/blocks/BlockSelection.svelte';
+	import DbSelection from '$lib/components/database/DBSelection.svelte';
+	import CurrentQuery from '$lib/components/queries/CurrentQuery.svelte';
+	import BlockSelection from '$lib/components/blocks/BlockSelection.svelte';
 
 	onMount(async () => {
 		const res = await fetch('/simplefolks.sqlite');
