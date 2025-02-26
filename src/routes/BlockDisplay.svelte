@@ -14,7 +14,9 @@
 		} else if (trigger === TRIGGERS.DRAG_STARTED) {
 			const index = blocks.findIndex((block) => block.id === id);
 			const newId = `${id}_copy_${Math.round(Math.random() * 1000)}`;
-			event.detail.items = event.detail.items.filter((item: Item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]);
+			event.detail.items = event.detail.items.filter(
+				(item: { [SHADOW_ITEM_MARKER_PROPERTY_NAME]: string }) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]
+			);
 			event.detail.items.splice(index, 0, {
 				...blocks[index],
 				id: newId,

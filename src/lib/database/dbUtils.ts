@@ -41,7 +41,7 @@ export const getColumns = async (dbFile: ArrayBuffer, tableName: string) => {
 	const queryString = `SELECT * FROM ${tableName} LIMIT 0`;
 	const result = await query(dbFile, queryString);
 	if (result) {
-		const { columns, rows } = result;
+		const columns = result.columns;
 		return columns;
 	}
 };

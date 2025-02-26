@@ -9,7 +9,7 @@
 		blocks = event.detail.items;
 	};
 
-	const handleFinalize = (event: CustomEvent) => {
+	const handleFinalize = () => {
 		blocks = [];
 	};
 </script>
