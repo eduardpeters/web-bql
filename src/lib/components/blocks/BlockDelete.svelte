@@ -3,7 +3,7 @@
 	import Block from '$lib/components/blocks/Block.svelte';
 	import { dndzone } from 'svelte-dnd-action';
 
-	let blocks: BlockContent[] = [];
+	let blocks = $state<BlockContent[]>([]);
 
 	const handleConsider = (event: CustomEvent) => {
 		blocks = event.detail.items;
@@ -27,12 +27,7 @@
 		</svg>
 		<p class="zone-title">Block disposal zone</p>
 	</div>
-	<div
-		class="delete__dropzone"
-		use:dndzone={{ items: blocks }}
-		on:consider={handleConsider}
-		on:finalize={handleFinalize}
-	>
+	<div class="delete__dropzone" use:dndzone={{ items: blocks }} onconsider={handleConsider} onfinalize={handleFinalize}>
 		{#each blocks as block (block.id)}
 			<Block content={block} />
 		{/each}
