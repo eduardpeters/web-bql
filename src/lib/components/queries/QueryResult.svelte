@@ -2,7 +2,8 @@
 	import { dbFile } from '$lib/stores/dbStore';
 	import query from '$lib/database/connection';
 	import queryParser from '$lib/utils/queryParser';
-	import type { BlockContent, QueryResult } from '$lib/appTypes';
+	import type { BlockContent } from '$lib/types/Blocks';
+	import type { QueryResult } from '$lib/types/Queries';
 
 	export let queryElements: BlockContent[];
 	let queryString = '';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import QueryDisplay from './QueryDisplay.svelte';
-	import type { BlockContent } from '$lib/appTypes';
+	import type { BlockContent } from '$lib/types/Blocks';
 	import QueryResult from './QueryResult.svelte';
 	import BlockDelete from '../blocks/BlockDelete.svelte';
 

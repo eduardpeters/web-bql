@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { dndzone } from 'svelte-dnd-action';
-	import type { BlockContent } from '$lib/appTypes';
+	import type { BlockContent } from '$lib/types/Blocks';
 	import Block from '$lib/components/blocks/Block.svelte';
 
 	export let queryElements: BlockContent[];

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { BlockContent } from '$lib/appTypes';
+	import type { BlockContent } from '$lib/types/Blocks';
 	import Block from '$lib/components/blocks/Block.svelte';
 	import { dndzone } from 'svelte-dnd-action';
 

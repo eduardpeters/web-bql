@@ -1,4 +1,4 @@
-import { BlockTypes, type BlockContent } from '$lib/appTypes';
+import { BlockTypes, type BlockContent } from '$lib/types/Blocks';
 import query from './connection';
 
 export const getDbBlocks = async (dbFile: ArrayBuffer) => {

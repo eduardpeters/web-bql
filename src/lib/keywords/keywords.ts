@@ -1,4 +1,4 @@
-import { BlockTypes } from '$lib/appTypes';
+import { BlockTypes } from '$lib/types/Blocks';
 
 export const keywords = [
 	{

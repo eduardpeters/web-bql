@@ -1,4 +1,4 @@
-import { BlockTypes, type BlockContent } from '$lib/appTypes';
+import { BlockTypes, type BlockContent } from '$lib/types/Blocks';
 
 /*
 Block types that require special handling are symbol and numbers

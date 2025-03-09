@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { BlockTypes } from '$lib/appTypes';
+import { BlockTypes } from '$lib/types/Blocks';
 import queryParser from './queryParser';
 
 const testArrayOne = [
