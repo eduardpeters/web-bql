@@ -1,9 +1,13 @@
 <script lang="ts">
-	import { BlockTypes, type BlockContent, type Dictionary } from '$lib/appTypes';
+	import { BlockTypes, type BlockContent, type BlockType } from '$lib/types/Blocks';
 
-	export let content: BlockContent;
+	interface Props {
+		content: BlockContent;
+	}
 
-	const colors: Dictionary<string> = {
+	let { content }: Props = $props();
+
+	const colors: { [k in BlockType]: string } = {
 		[BlockTypes.keyword]: '#78C6A3',
 		[BlockTypes.column]: '#67B99A',
 		[BlockTypes.table]: '#14746F',
