@@ -2,19 +2,17 @@
 	import { dbFile, tablesAndColumns } from '$lib/stores/dbStore';
 	import { getDbBlocks } from '$lib/database/dbUtils';
 
-	let input: HTMLInputElement;
-	let isOnDragArea = false;
-
-	$: active_class = isOnDragArea ? 'input_active' : '';
+	let input = $state<HTMLInputElement | undefined>(undefined);
+	let isOnDragArea = $state<boolean>(false);
 
 	const handleDrop = (event: DragEvent) => {
-		if (!event || !event.dataTransfer) return;
+		if (!input || !event || !event.dataTransfer) return;
 		input.files = event.dataTransfer.files;
 		handleUpload();
 	};
 
 	const handleUpload = () => {
-		if (!input.files) return;
+		if (!input?.files) return;
 		const newFile = input.files[0];
 		if (!newFile) return;
 		const r = new FileReader();
@@ -38,15 +36,15 @@
 			{/if}
 		</div>
 		<label
-			class="input_container {active_class}"
-			on:dragenter={() => (isOnDragArea = true)}
-			on:dragleave={() => (isOnDragArea = false)}
-			on:dragover|preventDefault
-			on:drop|preventDefault={handleDrop}
+			class={`input_container ${isOnDragArea ? 'input_active' : ''}`}
+			ondragenter={() => (isOnDragArea = true)}
+			ondragleave={() => (isOnDragArea = false)}
+			ondragover={(e) => e.preventDefault()}
+			ondrop={handleDrop}
 		>
 			<span class="input_title">Drop a SQLite DB here!</span>
 			or
-			<input type="file" accept=".sqlite" bind:this={input} on:change={handleUpload} />
+			<input type="file" accept=".sqlite" bind:this={input} onchange={handleUpload} />
 		</label>
 	</div>
 </div>
