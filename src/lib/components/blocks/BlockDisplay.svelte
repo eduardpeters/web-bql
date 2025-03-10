@@ -12,7 +12,6 @@
 	let ignoreDndEvents = false;
 
 	const handleConsider = (event: CustomEvent) => {
-		console.log(ignoreDndEvents);
 		const { trigger, id } = event.detail.info;
 		if (trigger === TRIGGERS.DRAGGED_ENTERED) {
 			ignoreDndEvents = true;
