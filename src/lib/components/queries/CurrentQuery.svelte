@@ -10,7 +10,7 @@
 <div class="container">
 	<QueryDisplay bind:queryElements />
 	<BlockDelete />
-	<QueryResult bind:queryElements />
+	<QueryResult {queryElements} />
 </div>
 
 <style>

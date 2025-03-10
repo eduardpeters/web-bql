@@ -5,9 +5,13 @@
 	import type { BlockContent } from '$lib/types/Blocks';
 	import type { QueryResult } from '$lib/types/Queries';
 
-	export let queryElements: BlockContent[];
-	let queryString = '';
-	let queryResult: QueryResult | undefined;
+	interface Props {
+		queryElements: BlockContent[];
+	}
+
+	let { queryElements }: Props = $props();
+	let queryString = $state<string>('');
+	let queryResult = $state<QueryResult | undefined>(undefined);
 
 	const runQuery = async () => {
 		if (!$dbFile || queryElements.length === 0) return;
@@ -24,8 +28,8 @@
 
 <div class="container">
 	<div class="query_controls">
-		<button class="button_run" on:click={runQuery}>Run Query</button>
-		<button class="button_reset" on:click={handleReset}> Reset Result</button>
+		<button class="button_run" onclick={runQuery}>Run Query</button>
+		<button class="button_reset" onclick={handleReset}> Reset Result</button>
 	</div>
 	{#if !queryResult}
 		<p class="placeholder">Run a query to display results here</p>
