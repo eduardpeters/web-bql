@@ -4,7 +4,7 @@
 	import QueryResult from './QueryResult.svelte';
 	import BlockDelete from '../blocks/BlockDelete.svelte';
 
-	let queryElements: BlockContent[] = [];
+	let queryElements = $state<BlockContent[]>([]);
 </script>
 
 <div class="container">

@@ -3,7 +3,11 @@
 	import type { BlockContent } from '$lib/types/Blocks';
 	import Block from '$lib/components/blocks/Block.svelte';
 
-	export let queryElements: BlockContent[];
+	interface Props {
+		queryElements: BlockContent[];
+	}
+
+	let { queryElements = $bindable() }: Props = $props();
 
 	const handleConsider = (event: CustomEvent) => {
 		queryElements = event.detail.items;
@@ -23,14 +27,14 @@
 		class="query_holder"
 		tabindex="-1"
 		use:dndzone={{ items: queryElements }}
-		on:consider={handleConsider}
-		on:finalize={handleFinalize}
+		onconsider={handleConsider}
+		onfinalize={handleFinalize}
 	>
 		{#each queryElements as element (element.id)}
 			<Block content={element} />
 		{/each}
 	</div>
-	<button on:click={() => (queryElements = [])}>RESET</button>
+	<button onclick={() => (queryElements = [])}>RESET</button>
 </div>
 
 <style>
