@@ -3,11 +3,16 @@
 	import type { BlockContent } from '$lib/types/Blocks';
 	import Block from '$lib/components/blocks/Block.svelte';
 
-	export let blocks: BlockContent[];
+	interface Props {
+		blocks: BlockContent[];
+	}
+
+	let { blocks }: Props = $props();
 
 	let ignoreDndEvents = false;
 
 	const handleConsider = (event: CustomEvent) => {
+		console.log(ignoreDndEvents);
 		const { trigger, id } = event.detail.info;
 		if (trigger === TRIGGERS.DRAGGED_ENTERED) {
 			ignoreDndEvents = true;
@@ -40,7 +45,7 @@
 	};
 </script>
 
-<div class="keywords_holder" use:dndzone={{ items: blocks }} on:consider={handleConsider} on:finalize={handleFinalize}>
+<div class="keywords_holder" use:dndzone={{ items: blocks }} onconsider={handleConsider} onfinalize={handleFinalize}>
 	{#each blocks as block (block.id)}
 		<Block content={block} />
 	{/each}

@@ -4,21 +4,19 @@
 	import { tablesAndColumns } from '$lib/stores/dbStore';
 	import { keywords } from '$lib/keywords/keywords';
 	import { symbols } from '$lib/keywords/symbols';
+	import type { BlockContent } from '$lib/types/Blocks';
 
-	enum BlockOptions {
-		Keywords,
-		TablesAndColumns,
-		Symbols,
-	}
+	const BlockOptions = {
+		Keywords: 0,
+		TablesAndColumns: 1,
+		Symbols: 2,
+	} as const;
+	type BlockOption = (typeof BlockOptions)[keyof typeof BlockOptions];
 
-	let blocksToDisplay = keywords;
-	let blocksSelected = BlockOptions.Keywords;
+	let blocksToDisplay = $state<BlockContent[]>(keywords);
+	let blocksSelected = $state<BlockOption>(BlockOptions.Keywords);
 
-	$: {
-		if ($tablesAndColumns && blocksSelected === BlockOptions.TablesAndColumns) blocksToDisplay = $tablesAndColumns;
-	}
-
-	const handleSelection = (selection: BlockOptions) => {
+	const handleSelection = (selection: BlockOption) => {
 		blocksSelected = selection;
 		if (blocksSelected === BlockOptions.Keywords) {
 			blocksToDisplay = keywords;
@@ -35,21 +33,21 @@
 		<button
 			class="option"
 			class:selected={blocksSelected === BlockOptions.Keywords}
-			on:click={() => handleSelection(BlockOptions.Keywords)}
+			onclick={() => handleSelection(BlockOptions.Keywords)}
 		>
 			SQL Keywords
 		</button>
 		<button
 			class="option"
 			class:selected={blocksSelected === BlockOptions.TablesAndColumns}
-			on:click={() => handleSelection(BlockOptions.TablesAndColumns)}
+			onclick={() => handleSelection(BlockOptions.TablesAndColumns)}
 		>
 			Tables and Columns
 		</button>
 		<button
 			class="option"
 			class:selected={blocksSelected === BlockOptions.Symbols}
-			on:click={() => handleSelection(BlockOptions.Symbols)}
+			onclick={() => handleSelection(BlockOptions.Symbols)}
 		>
 			Numbers and Symbols
 		</button>
