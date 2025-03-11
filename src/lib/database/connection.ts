@@ -1,7 +1,14 @@
-import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
+import sqlite3InitModule, { type Database } from '@sqlite.org/sqlite-wasm';
 
-const query = async (dbFile: ArrayBuffer, queryString: string) => {
+const query = async (
+	dbFile: ArrayBuffer,
+	queryString: string
+): Promise<{ columns: string[]; rows: string[] } | undefined> => {
 	const db = await initializeDB(dbFile);
+	if (!db) {
+		return;
+	}
+
 	const columns: string[] = [];
 	const rows: string[] = [];
 	try {
@@ -9,6 +16,7 @@ const query = async (dbFile: ArrayBuffer, queryString: string) => {
 			sql: queryString,
 			columnNames: columns,
 			resultRows: rows,
+			rowMode: 'array',
 		});
 		return {
 			columns,
@@ -22,13 +30,13 @@ const query = async (dbFile: ArrayBuffer, queryString: string) => {
 	}
 };
 
-const initializeDB = async (dbFile: ArrayBuffer) => {
+const initializeDB = async (dbFile: ArrayBuffer): Promise<Database | undefined> => {
 	const sqlite3 = await sqlite3InitModule();
 	try {
 		const p = sqlite3.wasm.allocFromTypedArray(dbFile);
 		const db = new sqlite3.oo1.DB();
 		const rc = sqlite3.capi.sqlite3_deserialize(
-			db.pointer,
+			db.pointer!,
 			'main',
 			p,
 			dbFile.byteLength,
