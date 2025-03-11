@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { BlockContent } from '$lib/appTypes';
+import type { BlockContent } from '$lib/types/Blocks';
 
 export const dbFile = writable<ArrayBuffer | null>(null);
 
