@@ -7,7 +7,7 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
 	if (!tables) {
 		return blocks;
 	}
-	for (let i = 0; i < tables?.length; i++) {
+	for (let i = 0; i < tables.length; i++) {
 		blocks.push({
 			id: `${tables[i]}-t-${Math.round(Math.random() * 1000)}`,
 			name: tables[i],
@@ -17,7 +17,7 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
 		if (!columns) {
 			break;
 		}
-		for (let j = 0; j < columns?.length; j++) {
+		for (let j = 0; j < columns.length; j++) {
 			blocks.push({
 				id: `${columns[j]}-c-${Math.round(Math.random() * 1000)}`,
 				name: columns[j],
