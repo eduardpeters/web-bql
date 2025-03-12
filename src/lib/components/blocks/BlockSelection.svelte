@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BlockDisplay from './BlockDisplay.svelte';
 
-	import { tablesAndColumns } from '$lib/stores/dbStore';
+	import { dbState } from '$lib/database/dbState.svelte';
 	import { keywords } from '$lib/keywords/keywords';
 	import { symbols } from '$lib/keywords/symbols';
 	import type { BlockContent } from '$lib/types/Blocks';
@@ -16,12 +16,18 @@
 	let blocksToDisplay = $state<BlockContent[]>(keywords);
 	let blocksSelected = $state<BlockOption>(BlockOptions.Keywords);
 
+	$effect(() => {
+		if (blocksSelected === BlockOptions.TablesAndColumns) {
+			blocksToDisplay = dbState.tablesAndColumns;
+		}
+	});
+
 	const handleSelection = (selection: BlockOption) => {
 		blocksSelected = selection;
 		if (blocksSelected === BlockOptions.Keywords) {
 			blocksToDisplay = keywords;
 		} else if (blocksSelected === BlockOptions.TablesAndColumns) {
-			blocksToDisplay = $tablesAndColumns;
+			blocksToDisplay = dbState.tablesAndColumns;
 		} else if (blocksSelected === BlockOptions.Symbols) {
 			blocksToDisplay = symbols;
 		}

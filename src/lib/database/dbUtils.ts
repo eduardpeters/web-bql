@@ -1,13 +1,15 @@
 import { BlockTypes, type BlockContent } from '$lib/types/Blocks';
 import query from './connection';
 
-export const getDbBlocks = async (dbFile: ArrayBuffer) => {
+export const getDbBlocks = async (dbFile: ArrayBuffer): Promise<BlockContent[]> => {
 	const blocks: BlockContent[] = [];
+
 	const tables = await getTables(dbFile);
 	if (!tables) {
 		return blocks;
 	}
-	for (let i = 0; i < tables?.length; i++) {
+
+	for (let i = 0; i < tables.length; i++) {
 		blocks.push({
 			id: `${tables[i]}-t-${Math.round(Math.random() * 1000)}`,
 			name: tables[i],
@@ -17,7 +19,7 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
 		if (!columns) {
 			break;
 		}
-		for (let j = 0; j < columns?.length; j++) {
+		for (let j = 0; j < columns.length; j++) {
 			blocks.push({
 				id: `${columns[j]}-c-${Math.round(Math.random() * 1000)}`,
 				name: columns[j],
@@ -25,11 +27,13 @@ export const getDbBlocks = async (dbFile: ArrayBuffer) => {
 			});
 		}
 	}
+
 	return blocks;
 };
 
-export const getTables = async (dbFile: ArrayBuffer) => {
+export const getTables = async (dbFile: ArrayBuffer): Promise<string[] | undefined> => {
 	const queryString = "SELECT name FROM sqlite_master WHERE type = 'table'";
+
 	const result = await query(dbFile, queryString);
 	if (result) {
 		const tableNames = result.rows.map((name) => name[0]);
@@ -37,8 +41,9 @@ export const getTables = async (dbFile: ArrayBuffer) => {
 	}
 };
 
-export const getColumns = async (dbFile: ArrayBuffer, tableName: string) => {
+export const getColumns = async (dbFile: ArrayBuffer, tableName: string): Promise<string[] | undefined> => {
 	const queryString = `SELECT * FROM ${tableName} LIMIT 0`;
+
 	const result = await query(dbFile, queryString);
 	if (result) {
 		const columns = result.columns;

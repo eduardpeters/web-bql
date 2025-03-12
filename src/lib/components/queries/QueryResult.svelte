@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { dbFile } from '$lib/stores/dbStore';
 	import query from '$lib/database/connection';
+	import { dbState } from '$lib/database/dbState.svelte';
 	import queryParser from '$lib/utils/queryParser';
 	import type { BlockContent } from '$lib/types/Blocks';
 	import type { QueryResult } from '$lib/types/Queries';
@@ -14,10 +14,10 @@
 	let queryResult = $state<QueryResult | undefined>(undefined);
 
 	const runQuery = async () => {
-		if (!$dbFile || queryElements.length === 0) return;
+		if (!dbState.dbFile || queryElements.length === 0) return;
 		queryString = queryParser(queryElements);
 		if (queryString.length === 0) return;
-		queryResult = await query($dbFile, queryString);
+		queryResult = await query(dbState.dbFile, queryString);
 	};
 
 	const handleReset = () => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { dbFile, tablesAndColumns } from '$lib/stores/dbStore';
+	import { dbState } from '$lib/database/dbState.svelte';
 	import { getDbBlocks } from '$lib/database/dbUtils';
 
 	let input = $state<HTMLInputElement | undefined>(undefined);
@@ -17,8 +17,8 @@
 		if (!newFile) return;
 		const r = new FileReader();
 		r.addEventListener('load', async function onLoad() {
-			$dbFile = r.result as ArrayBuffer;
-			$tablesAndColumns = await getDbBlocks($dbFile);
+			dbState.dbFile = r.result as ArrayBuffer;
+			dbState.tablesAndColumns = await getDbBlocks(dbState.dbFile);
 			this.removeEventListener('load', onLoad);
 		});
 		r.readAsArrayBuffer(newFile);

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { dbFile, tablesAndColumns } from '$lib/stores/dbStore';
 
+	import { dbState } from '$lib/database/dbState.svelte';
 	import { getDbBlocks } from '$lib/database/dbUtils';
 
 	import DbSelection from '$lib/components/database/DBSelection.svelte';
@@ -10,8 +10,8 @@
 
 	onMount(async () => {
 		const res = await fetch('/simplefolks.sqlite');
-		$dbFile = await res.arrayBuffer();
-		$tablesAndColumns = await getDbBlocks($dbFile);
+		dbState.dbFile = await res.arrayBuffer();
+		dbState.tablesAndColumns = await getDbBlocks(dbState.dbFile);
 	});
 </script>
 
