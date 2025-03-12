@@ -16,6 +16,12 @@
 	let blocksToDisplay = $state<BlockContent[]>(keywords);
 	let blocksSelected = $state<BlockOption>(BlockOptions.Keywords);
 
+	$effect(() => {
+		if (blocksSelected === BlockOptions.TablesAndColumns) {
+			blocksToDisplay = dbState.tablesAndColumns;
+		}
+	});
+
 	const handleSelection = (selection: BlockOption) => {
 		blocksSelected = selection;
 		if (blocksSelected === BlockOptions.Keywords) {
