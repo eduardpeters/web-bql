@@ -35,7 +35,7 @@
 </script>
 
 {#snippet selectionButton(title: string, isSelected: boolean, onClick: VoidFunction)}
-	<button class="option" class:selected={isSelected} onclick={onClick}>
+	<button class={['option', isSelected && 'selected']} onclick={onClick}>
 		{title}
 	</button>
 {/snippet}
