@@ -34,29 +34,23 @@
 	};
 </script>
 
+{#snippet selectionButton(title: string, isSelected: boolean, onClick: VoidFunction)}
+	<button class="option" class:selected={isSelected} onclick={onClick}>
+		{title}
+	</button>
+{/snippet}
+
 <div class="container">
 	<div class="selection_controls">
-		<button
-			class="option"
-			class:selected={blocksSelected === BlockOptions.Keywords}
-			onclick={() => handleSelection(BlockOptions.Keywords)}
-		>
-			SQL Keywords
-		</button>
-		<button
-			class="option"
-			class:selected={blocksSelected === BlockOptions.TablesAndColumns}
-			onclick={() => handleSelection(BlockOptions.TablesAndColumns)}
-		>
-			Tables and Columns
-		</button>
-		<button
-			class="option"
-			class:selected={blocksSelected === BlockOptions.Symbols}
-			onclick={() => handleSelection(BlockOptions.Symbols)}
-		>
-			Numbers and Symbols
-		</button>
+		{@render selectionButton('SQL Keywords', blocksSelected === BlockOptions.Keywords, () =>
+			handleSelection(BlockOptions.Keywords)
+		)}
+		{@render selectionButton('Tables and Columns', blocksSelected === BlockOptions.TablesAndColumns, () =>
+			handleSelection(BlockOptions.TablesAndColumns)
+		)}
+		{@render selectionButton('Numbers and Symbols', blocksSelected === BlockOptions.Symbols, () =>
+			handleSelection(BlockOptions.Symbols)
+		)}
 	</div>
 	<BlockDisplay blocks={blocksToDisplay} />
 </div>
